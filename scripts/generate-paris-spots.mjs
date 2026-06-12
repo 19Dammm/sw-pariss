@@ -1,0 +1,450 @@
+import { readFileSync, writeFileSync } from 'node:fs'
+import { resolve, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const root = resolve(__dirname, '..')
+
+/** @typedef {{ id: string; name: string; lat: number; lng: number; address: string; arrondissement: string; equipment: string[]; note?: string }} Spot */
+
+/** @type {Spot[]} */
+const CURATED = [
+  {
+    id: 'spot-cambrai',
+    name: 'Street Workout Cambrai',
+    lat: 48.89515,
+    lng: 2.37123,
+    address: "172 rue d'Aubervilliers, 75019 Paris",
+    arrondissement: '19e',
+    equipment: [
+      'Barres à dips',
+      'Barres de traction',
+      'Box / plateforme squat',
+      'Sac de frappe',
+      'Pneu fonctionnel',
+      'Fontaine',
+      'Bancs',
+    ],
+    note: 'Éclairage nocturne. Fréquentation conseillée en journée.',
+  },
+  {
+    id: 'spot-voltiges',
+    name: 'Jardin des Voltiges - La Villette',
+    lat: 48.8939,
+    lng: 2.3921,
+    address: 'Allée du Cercle, Parc de la Villette, 75019 Paris',
+    arrondissement: '19e',
+    equipment: [
+      'Barres parallèles',
+      'Barres de traction',
+      'Modules cross-training',
+      'Sac de boxe',
+      'Anneaux',
+      'Modules parkour',
+    ],
+    note: 'Plus grand espace street workout de France (~1 540 m²). Ouvert 6h-1h. Réservé aux +14 ans et +1,40 m.',
+  },
+  {
+    id: 'spot-km25',
+    name: 'Kilomètre25 - Pantin Canal',
+    lat: 48.8957,
+    lng: 2.3833,
+    address: '12/A Rue Ella Fitzgerald, Pont-de-Flandre, 75019 Paris',
+    arrondissement: '19e',
+    equipment: ['Barres de traction', 'Poids', 'Roof'],
+    note: 'Spot avancé couvert. Métro Corentin Cariou.',
+  },
+  {
+    id: 'spot-quai-lot',
+    name: 'Quai du Lot',
+    lat: 48.897,
+    lng: 2.378,
+    address: 'Quai du Lot, Pont-de-Flandre, 75019 Paris',
+    arrondissement: '19e',
+    equipment: ['Anneaux', 'Poids'],
+    note: 'Spot calme au bord de l\'eau. Métro Corentin Cariou.',
+  },
+  {
+    id: 'spot-quai-loire',
+    name: 'Quai de Loire - Bassin de la Villette',
+    lat: 48.8855,
+    lng: 2.37,
+    address: 'Quai de la Loire, La Villette, 75019 Paris',
+    arrondissement: '19e',
+    equipment: ['Banc abdos', 'Poids'],
+    note: 'Bord du canal. Métro Jaurès ou Laumière.',
+  },
+  {
+    id: 'spot-chaumont',
+    name: 'Centre sportif Porte Chaumont',
+    lat: 48.882,
+    lng: 2.395,
+    address: "Boulevard Périphérique Extérieur, Quartier d'Amérique, 75019 Paris",
+    arrondissement: '19e',
+    equipment: ['Barres de traction', 'Barres parallèles'],
+    note: 'Spot bien équipé en bordure du périph. Métro Danube.',
+  },
+  {
+    id: 'spot-buttes-chaumont',
+    name: 'Parc des Buttes-Chaumont',
+    lat: 48.8806,
+    lng: 2.40055,
+    address: 'Parc des Buttes-Chaumont, 75019 Paris',
+    arrondissement: '19e',
+    equipment: ['Barres de traction', 'Barres parallèles', 'Modules fitness'],
+    note: 'Agrès en plein air dans le parc. Métro Botzaris ou Buttes-Chaumont.',
+  },
+  {
+    id: 'spot-belleville',
+    name: 'Parc de Belleville',
+    lat: 48.8708,
+    lng: 2.3852,
+    address: 'Cité de Gênes, Belleville, 75020 Paris',
+    arrondissement: '20e',
+    equipment: ['Barres de traction', 'Barres parallèles'],
+    note: 'Vue panoramique sur Paris. Métro Couronnes ou Belleville.',
+  },
+  {
+    id: 'spot-bercy',
+    name: 'Parc de Bercy - Street Workout',
+    lat: 48.83593,
+    lng: 2.38038,
+    address: '208 Quai de Bercy, 75012 Paris',
+    arrondissement: '12e',
+    equipment: [
+      'Anneaux',
+      'Barre à pompe',
+      'Barre de traction',
+      'Barres parallèles',
+      'Échelle horizontale',
+      'Espalier',
+      'Pont de singe',
+    ],
+    note: 'Spot très fréquenté, réputé pour les pratiquants confirmés. Accès 24h/24. Métro Bercy.',
+  },
+  {
+    id: 'spot-henri-christine',
+    name: 'Square Henri Christiné',
+    lat: 48.87813,
+    lng: 2.36634,
+    address: '151 Quai de Jemmapes, 75010 Paris',
+    arrondissement: '10e',
+    equipment: ['Barres de traction', 'Barres parallèles', 'Modules fitness'],
+    note: 'Cadre ombragé au bord du canal Saint-Martin. Idéal en été.',
+  },
+  {
+    id: 'spot-grands-explorateurs',
+    name: 'Jardin des Grands-Explorateurs',
+    lat: 48.84401,
+    lng: 2.33665,
+    address: "Avenue de l'Observatoire, 75006 Paris",
+    arrondissement: '6e',
+    equipment: ['Barres de traction', 'Barres parallèles', 'Pont de singe'],
+    note: 'Petit spot complet au nord du jardin, adjacent au Luxembourg. Barres, parallèles, pont de singe.',
+  },
+  {
+    id: 'spot-ile-cygnes',
+    name: "Street Workout de l'Île aux Cygnes",
+    lat: 48.8503,
+    lng: 2.2801,
+    address: 'Allée des Cygnes, 75015 Paris',
+    arrondissement: '15e',
+    equipment: ['Barres de traction', 'Barres parallèles', 'Espalier', 'Mur d\'escalade'],
+    note: 'Sous le pont de Grenelle, près de la Statue de la Liberté.',
+  },
+  {
+    id: 'spot-longchamp',
+    name: 'Bois de Boulogne - Allée de Longchamp',
+    lat: 48.85218,
+    lng: 2.27541,
+    address: 'Allée de Longchamp, Bois de Boulogne, 75016 Paris',
+    arrondissement: '16e',
+    equipment: ['Barres de traction', 'Espalier', 'Pont de singe', 'Modules variés'],
+    note: 'Un des spots les plus complets de Paris, cadre boisé.',
+  },
+  {
+    id: 'spot-kellerman',
+    name: 'Parc Kellerman',
+    lat: 48.81879,
+    lng: 2.35548,
+    address: '45 Boulevard Kellermann, 75013 Paris',
+    arrondissement: '13e',
+    equipment: [
+      'Banc abdos',
+      'Barre à pompe',
+      'Barre de traction',
+      'Barres parallèles',
+      'Échelle horizontale',
+      'Espalier',
+      'Barres à dips',
+      'Pont de singe',
+    ],
+    note: 'Parc sur 3 niveaux. Ouvert 8h-17h45.',
+  },
+  {
+    id: 'spot-mlk',
+    name: 'Parc Martin Luther King',
+    lat: 48.89061,
+    lng: 2.30783,
+    address: '102 Avenue de Saint-Ouen, 75017 Paris',
+    arrondissement: '17e',
+    equipment: ['Barres de traction', 'Barres parallèles', 'Modules fitness'],
+    note: 'Grand parc du 17e avec aire street workout.',
+  },
+  {
+    id: 'spot-binet',
+    name: 'Street Workout Binet',
+    lat: 48.89922,
+    lng: 2.33974,
+    address: '21 Rue René Binet, 75018 Paris',
+    arrondissement: '18e',
+    equipment: ['Barres de traction', 'Barres parallèles', 'Modules fitness'],
+    note: 'Accès 24h/24. Pas de toilettes sur place.',
+  },
+  {
+    id: 'spot-poissonniers',
+    name: 'Centre Sportif des Poissonniers',
+    lat: 48.90026,
+    lng: 2.34979,
+    address: '2 Rue Jean Cocteau, 75018 Paris',
+    arrondissement: '18e',
+    equipment: ['Barres de traction', 'Barres parallèles', 'Piste d\'athlétisme'],
+    note: 'Sol tartan, confortable pour les entraînements.',
+  },
+  {
+    id: 'spot-square-leon',
+    name: 'Square Léon',
+    lat: 48.88665,
+    lng: 2.35315,
+    address: 'Rue Cavé / Rue des Gardes, 75018 Paris',
+    arrondissement: '18e',
+    equipment: ['Barres de traction', 'Barres parallèles'],
+    note: 'Spot de quartier en plein air.',
+  },
+  {
+    id: 'spot-porte-ivry',
+    name: "Street Workout Porte d'Ivry",
+    lat: 48.81921,
+    lng: 2.36889,
+    address: "Porte d'Ivry, 75013 Paris",
+    arrondissement: '13e',
+    equipment: ['Barres de traction', 'Barres parallèles', 'Modules fitness'],
+    note: 'Aire de street workout en accès libre.',
+  },
+  {
+    id: 'spot-porte-charenton',
+    name: 'Street Workout Porte de Charenton',
+    lat: 48.82741,
+    lng: 2.41048,
+    address: 'Porte de Charenton, 75012 Paris',
+    arrondissement: '12e',
+    equipment: ['Barres de traction', 'Barres parallèles'],
+    note: 'Spot en bordure du 12e.',
+  },
+  {
+    id: 'spot-parc-floral',
+    name: 'Parc Floral de Paris - Parcours sportif',
+    lat: 48.84096,
+    lng: 2.40984,
+    address: 'Route de la Pyramide, Bois de Vincennes, 75012 Paris',
+    arrondissement: '12e',
+    equipment: ['Barres de traction', 'Barres parallèles', 'Anneaux', 'Espalier', 'Parcours complet'],
+    note: 'Parcours sportif et agrès dans le Parc Floral (Bois de Vincennes).',
+  },
+  {
+    id: 'spot-coulee-verte',
+    name: 'Coulée verte René-Dumont',
+    lat: 48.8494,
+    lng: 2.37157,
+    address: 'Coulée verte René-Dumont, 75012 Paris',
+    arrondissement: '12e',
+    equipment: ['Barres de traction', 'Modules fitness'],
+    note: 'De la rue Édouard-Lartet à Bastille.',
+  },
+  {
+    id: 'spot-mary-cassatt',
+    name: 'Jardin Mary Cassatt',
+    lat: 48.84594,
+    lng: 2.40101,
+    address: '55 Boulevard de Picpus, 75012 Paris',
+    arrondissement: '12e',
+    equipment: ['Barres de traction', 'Barres parallèles'],
+    note: 'Jardin de quartier avec agrès street workout.',
+  },
+  {
+    id: 'spot-elisa-borey',
+    name: 'Square Élisa Borey',
+    lat: 48.86653,
+    lng: 2.3904,
+    address: 'Square Élisa Borey, 75020 Paris',
+    arrondissement: '20e',
+    equipment: ['Barres de traction', 'Barres parallèles'],
+    note: 'Square du 20e avec agrès en plein air.',
+  },
+  {
+    id: 'spot-montsouris',
+    name: 'Parc Montsouris',
+    lat: 48.822,
+    lng: 2.3378,
+    address: 'Parc Montsouris, 75014 Paris',
+    arrondissement: '14e',
+    equipment: ['Barres de traction', 'Modules fitness'],
+    note: 'Aire fitness en plein air dans le parc.',
+  },
+  {
+    id: 'spot-bartholome',
+    name: 'Aire fitness - Avenue Albert Bartholomé',
+    lat: 48.82801,
+    lng: 2.2975,
+    address: 'Avenue Albert Bartholomé, 75015 Paris',
+    arrondissement: '15e',
+    equipment: ['Barres de traction', 'Barres parallèles'],
+    note: 'Aire en bord de Seine, côté 15e. Référencée sur les cartes calisthenics.',
+  },
+  {
+    id: 'spot-rivoli-orsay',
+    name: 'Esplanade Valéry-Giscard-d\'Estaing',
+    lat: 48.8595,
+    lng: 2.3265,
+    address: 'Esplanade Valéry-Giscard-d\'Estaing, 75007 Paris',
+    arrondissement: '7e',
+    equipment: ['Barres de traction', 'Barre à pompe'],
+    note: 'Aire fitness en bord de Seine, près du Musée d\'Orsay.',
+  },
+  {
+    id: 'spot-chapelle',
+    name: 'Chapelle International - Street Workout',
+    lat: 48.89787,
+    lng: 2.35799,
+    address: 'Chapelle International, 75018 Paris',
+    arrondissement: '18e',
+    equipment: ['Barres de traction', 'Barres parallèles'],
+    note: 'Nouveau quartier, spot en plein air.',
+  },
+  {
+    id: 'spot-roquette',
+    name: 'Square de la Roquette',
+    lat: 48.85961,
+    lng: 2.38462,
+    address: 'Square de la Roquette, 75011 Paris',
+    arrondissement: '11e',
+    equipment: ['Barres de traction', 'Barres parallèles'],
+    note: 'Square du 11e avec agrès.',
+  },
+  {
+    id: 'spot-roquette-fitness',
+    name: 'Aire fitness - Rue Merlin (Roquette)',
+    lat: 48.85989,
+    lng: 2.38484,
+    address: 'Rue Merlin, 75011 Paris',
+    arrondissement: '11e',
+    equipment: ['Barres de traction', 'Modules fitness'],
+    note: 'Aire fitness proche du quartier de la Roquette.',
+  },
+  {
+    id: 'spot-charonne',
+    name: 'Aire fitness - Charonne',
+    lat: 48.8574,
+    lng: 2.41188,
+    address: 'Rue Lucien Lambeau, 75020 Paris',
+    arrondissement: '20e',
+    equipment: ['Barres de traction', 'Barres parallèles'],
+    note: 'Spot de quartier à Charonne.',
+  },
+  {
+    id: 'spot-brassens',
+    name: 'Parc Georges-Brassens (bordure)',
+    lat: 48.82805,
+    lng: 2.2681,
+    address: 'Boulevard des Frères Voisin, 75015 Paris',
+    arrondissement: '15e',
+    equipment: ['Barres de traction', 'Modules fitness'],
+    note: 'Aire fitness proche du parc Georges-Brassens.',
+  },
+  {
+    id: 'spot-tolbiac',
+    name: 'Square de Tolbiac',
+    lat: 48.82741,
+    lng: 2.35978,
+    address: 'Square de Tolbiac, 75013 Paris',
+    arrondissement: '13e',
+    equipment: ['Barres de traction', 'Modules fitness'],
+    note: 'Spot du 13e sud.',
+  },
+  {
+    id: 'spot-maison-blanche',
+    name: 'Square Henri-Duchêne',
+    lat: 48.83149,
+    lng: 2.34802,
+    address: 'Square Henri-Duchêne, 75013 Paris',
+    arrondissement: '13e',
+    equipment: ['Barres de traction', 'Barres parallèles'],
+    note: 'Quartier Maison-Blanche.',
+  },
+  {
+    id: 'spot-villette-nord',
+    name: 'Parc de la Villette - Aire nord',
+    lat: 48.89641,
+    lng: 2.39627,
+    address: 'Parc de la Villette, 75019 Paris',
+    arrondissement: '19e',
+    equipment: ['Barres de traction', 'Barres parallèles'],
+    note: 'Aire fitness complémentaire au nord du parc.',
+  },
+  {
+    id: 'spot-canal-st-denis',
+    name: 'Canal Saint-Denis - Aire fitness',
+    lat: 48.8993,
+    lng: 2.38144,
+    address: 'Canal Saint-Denis, 75019 Paris',
+    arrondissement: '19e',
+    equipment: ['Barres de traction', 'Modules fitness', 'Accessible PMR'],
+    note: 'Aire éclairée, accessible fauteuil roulant.',
+  },
+  {
+    id: 'spot-daumesnil',
+    name: 'Parcours sportif Lac Daumesnil',
+    lat: 48.83502,
+    lng: 2.46424,
+    address: 'Lac Daumesnil, Bois de Vincennes, 75012 Paris',
+    arrondissement: '12e',
+    equipment: ['Barres de suspension', 'Barres parallèles', 'Anneaux', 'Espalier'],
+    note: 'Parcours sportif complet autour du lac.',
+  },
+]
+
+function dist(a, b) {
+  const R = 6371000
+  const dLat = ((b.lat - a.lat) * Math.PI) / 180
+  const dLon = ((b.lng - a.lng) * Math.PI) / 180
+  const x =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos((a.lat * Math.PI) / 180) *
+      Math.cos((b.lat * Math.PI) / 180) *
+      Math.sin(dLon / 2) ** 2
+  return 2 * R * Math.asin(Math.sqrt(x))
+}
+
+function dedupeSpots(spots) {
+  const kept = []
+  for (const spot of spots) {
+    const duplicate = kept.find((s) => dist(s, spot) < 120)
+    if (!duplicate) {
+      kept.push(spot)
+      continue
+    }
+    const preferCurrent =
+      spot.equipment.length > duplicate.equipment.length ||
+      (spot.note?.length ?? 0) > (duplicate.note?.length ?? 0)
+    if (preferCurrent) {
+      const idx = kept.indexOf(duplicate)
+      kept[idx] = { ...spot, id: duplicate.id }
+    }
+  }
+  return kept.sort((a, b) => a.arrondissement.localeCompare(b.arrondissement) || a.name.localeCompare(b.name))
+}
+
+const spots = dedupeSpots(CURATED)
+const outPath = resolve(root, 'public/data/spots.19e.json')
+writeFileSync(outPath, `${JSON.stringify(spots, null, 2)}\n`, 'utf8')
+console.log(`Wrote ${spots.length} spots to ${outPath}`)

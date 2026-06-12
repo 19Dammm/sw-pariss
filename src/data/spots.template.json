@@ -1,0 +1,13 @@
+[
+  {
+    "id": "spot-001",
+    "name": "Nom du spot",
+    "lat": 48.8882,
+    "lng": 2.3843,
+    "address": "Adresse complète ici, Paris 19e",
+    "arrondissement": "19e",
+    "equipment": ["Pull-up bars", "Dip bars"],
+    "note": "Ex. : éclairé le soir, souvent bondé le week-end"
+  }
+]
+
