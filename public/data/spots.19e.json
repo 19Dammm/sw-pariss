@@ -504,5 +504,82 @@
       "Barre à pompe"
     ],
     "note": "Aire fitness en bord de Seine, près du Musée d'Orsay."
-  }
+  },
+
+  {
+  "id": "jardin-du-luxembourg",
+  "name": "Jardin du Luxembourg",
+  "lat": 0.0000,
+  "lng": 0.0000,
+  "address": "",
+  "arrondissement": "6e",
+  "equipment": [],
+  "note": ""
+},
+
+{
+  "id": "quai-de-valmy",
+  "name": "Quai de Valmy",
+  "lat": 0.0000,
+  "lng": 0.0000,
+  "address": "159 bis quai de Valmy",
+  "arrondissement": "10e",
+  "equipment": [],
+  "note": ""
+},
+
+{
+  "id": "parc-richard-lenoir",
+  "name": "Parc Richard Lenoir",
+  "lat": 0.0000,
+  "lng": 0.0000,
+  "address": "73-81 boulevard Richard Lenoir",
+  "arrondissement": "11e",
+  "equipment": [],
+  "note": ""
+},
+
+{
+  "id": "parc-bartholome",
+  "name": "Parc Bartholomé",
+  "lat": 0.0000,
+  "lng": 0.0000,
+  "address": "",
+  "arrondissement": "14e",
+  "equipment": [],
+  "note": ""
+},
+
+{
+  "id": "square-henri-christine",
+  "name": "Square Henri Christiné",
+  "lat": 0.0000,
+  "lng": 0.0000,
+  "address": "151 quai de Jemmapes",
+  "arrondissement": "10e",
+  "equipment": [],
+  "note": ""
+},
+
+{
+  "id": "square-rue-des-jardiniers",
+  "name": "Square rue des Jardiniers",
+  "lat": 0.0000,
+  "lng": 0.0000,
+  "address": "rue des Jardiniers",
+  "arrondissement": "12e",
+  "equipment": [],
+  "note": ""
+},
+
+{
+  "id": "square-tolstoi",
+  "name": "Square Tolstoï",
+  "lat": 0.0000,
+  "lng": 0.0000,
+  "address": "",
+  "arrondissement": "16e",
+  "equipment": [],
+  "note": ""
+}
 ]
