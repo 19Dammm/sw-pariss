@@ -4,7 +4,7 @@ import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 
 /** Replace NOM-DU-REPO with your GitHub repository name before deploying. */
-const REPO_NAME = 'sw-paris'
+const REPO_NAME = 'sw-pariss'
 
 function spaFallback(): Plugin {
   return {
