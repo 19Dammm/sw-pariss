@@ -47,7 +47,10 @@ export function SpotSheet({ spot, isFavorite, userPosition, onClose, onToggleFav
   if (!spot) return null
 
   const origin = userPosition ?? PARIS_CENTER
-  const distanceMeters = getDistanceMeters(origin, { lat: spot.lat, lng: spot.lng })
+  const distanceMeters =
+  spot.lat !== undefined && spot.lng !== undefined
+    ? getDistanceMeters(origin, { lat: spot.lat, lng: spot.lng })
+    : null
   const hasRealPosition = userPosition !== null
 
   return (
@@ -62,13 +65,20 @@ export function SpotSheet({ spot, isFavorite, userPosition, onClose, onToggleFav
         <div className="sheet-meta">
           <span className="sheet-chip sheet-chip--arr">{spot.arrondissement}</span>
           <span className="sheet-chip sheet-chip--dist">
-            {hasRealPosition ? '📍' : '🗺️'} {formatDistance(distanceMeters)}
-            {!hasRealPosition && <span className="sheet-chip-sub"> du centre</span>}
-          </span>
+          {distanceMeters !== null
+            ? `${hasRealPosition ? '📍' : '🗺️'} ${formatDistance(distanceMeters)}${!hasRealPosition ? ' du centre' : ''}`
+            : '📍 Position inconnue'}
+        </span>
         </div>
       </div>
 
       <p className="sheet-address">{spot.address}</p>
+
+      {spot.isVerified === false && (
+        <div className="badge-unverified">
+          📍 Emplacement à vérifier
+        </div>
+      )}
 
       <div className="sheet-section">
         <p className="sheet-section-label">Équipements</p>

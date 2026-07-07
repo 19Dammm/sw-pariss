@@ -31,7 +31,11 @@ function MapBounds({ spots }: { spots: Spot[] }) {
     if (key === previousKey.current) return
     previousKey.current = key
 
-    const bounds = L.latLngBounds(spots.map((spot) => [spot.lat, spot.lng] as [number, number]))
+    const bounds = L.latLngBounds(
+    spots
+    .filter(s => s.lat !== undefined && s.lng !== undefined)
+    .map(s => [s.lat!, s.lng!] as [number, number])
+)
     map.fitBounds(bounds, { padding: [48, 48], maxZoom: 15, animate: false })
   }, [map, spots])
 
@@ -84,14 +88,17 @@ export function MapView({
         />
       ) : null}
 
-      {spots.map((spot) => (
+      {spots
+      .filter(spot => spot.lat !== undefined && spot.lng !== undefined)
+      .map((spot) => (
         <Marker
           key={spot.id}
-          position={[spot.lat, spot.lng]}
+          position={[spot.lat!, spot.lng!]}
           icon={createSpotIcon(theme, spot.id === selectedSpotId)}
           eventHandlers={{ click: () => onSelectSpot(spot) }}
         />
-      ))}
+      ))
+    }
     </MapContainer>
   )
 }

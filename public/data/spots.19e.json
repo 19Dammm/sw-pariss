@@ -497,30 +497,7 @@
     ],
     "note": "Petit spot complet au nord du jardin, adjacent au Luxembourg. Barres, parallèles, pont de singe."
   },
-  {
-    "id": "spot-rivoli-orsay",
-    "name": "Esplanade Valéry-Giscard-d'Estaing",
-    "lat": 48.8595,
-    "lng": 2.3265,
-    "address": "Esplanade Valéry-Giscard-d'Estaing, 75007 Paris",
-    "arrondissement": "7e",
-    "equipment": [
-      "Barres de traction",
-      "Barre à pompe"
-    ],
-    "note": "Aire fitness en bord de Seine, près du Musée d'Orsay."
-  },
 
-  {
-  "id": "jardin-du-luxembourg",
-  "name": "Jardin du Luxembourg",
-  "lat": 0.0000,
-  "lng": 0.0000,
-  "address": "",
-  "arrondissement": "6e",
-  "equipment": [],
-  "note": ""
-},
 
 {
   "id": "parc-richard-lenoir",
@@ -533,27 +510,6 @@
   "note": ""
 },
 
-{
-  "id": "parc-bartholome",
-  "name": "Parc Bartholomé",
-  "lat": 0.0000,
-  "lng": 0.0000,
-  "address": "",
-  "arrondissement": "14e",
-  "equipment": [],
-  "note": ""
-},
-
-{
-  "id": "square-henri-christine",
-  "name": "Square Henri Christiné",
-  "lat": 48.87759,
-  "lng": 2.36585,
-  "address": "151 quai de Jemmapes",
-  "arrondissement": "10e",
-  "equipment": [],
-  "note": ""
-},
 
 {
   "id": "square-rue-des-jardiniers",

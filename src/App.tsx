@@ -74,15 +74,16 @@ function App() {
   }, [arrondissement, query, spots])
 
   const nearbySpots = useMemo(() => {
-    return filteredSpots
-      .map((spot) => ({
-        spot,
-        distance: getDistanceMeters(listCenter, { lat: spot.lat, lng: spot.lng }),
-      }))
-      .filter((entry) => entry.distance <= NEARBY_RADIUS_METERS)
-      .sort((a, b) => a.distance - b.distance)
-      .map((entry) => entry.spot)
-  }, [listCenter, filteredSpots])
+  return filteredSpots
+    .filter(spot => spot.lat !== undefined && spot.lng !== undefined)
+    .map((spot) => ({
+      spot,
+      distance: getDistanceMeters(listCenter, { lat: spot.lat!, lng: spot.lng! }),
+    }))
+    .filter((entry) => entry.distance <= NEARBY_RADIUS_METERS)
+    .sort((a, b) => a.distance - b.distance)
+    .map((entry) => entry.spot)
+}, [listCenter, filteredSpots])
 
   const toggleFavorite = (spotId: string) => {
     setFavorites((current) => {

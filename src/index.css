@@ -931,3 +931,24 @@ html, body, #root {
   text-align: center;
   margin-top: 40px;
 }
+
+/* ── Badge non vérifié ── */
+.badge-unverified {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #92400e;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  margin-bottom: 12px;
+}
+
+[data-theme='dark'] .badge-unverified {
+  color: #fbbf24;
+  background: #27200a;
+  border-color: #78350f;
+}
