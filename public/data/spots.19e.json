@@ -223,8 +223,12 @@
       "Barres de traction",
       "Barres parallèles",
       "Espalier",
-      "Mur d'escalade"
+      "Mur d'escalade",
+      "Sac de frappe",
+      "Échelle horizontale",
+      ""
     ],
+    "ground": "sable, tartan",
     "note": "Sous le pont de Grenelle, près de la Statue de la Liberté."
   },
   {
@@ -327,15 +331,16 @@
   {
     "id": "spot-chaumont",
     "name": "Centre sportif Porte Chaumont",
-    "lat": 48.882,
-    "lng": 2.395,
-    "address": "Boulevard Périphérique Extérieur, Quartier d'Amérique, 75019 Paris",
+    "lat": 48.88539,
+    "lng": 2.39886,
+    "address": "24 Avenue de la Porte Chaumont 75019 Paris",
     "arrondissement": "19e",
     "equipment": [
       "Barres de traction",
       "Barres parallèles"
     ],
-    "note": "Spot bien équipé en bordure du périph. Métro Danube."
+    "ground": "tartan, goudron" ,
+    "note": ""
   },
   {
     "id": "spot-voltiges",
@@ -518,21 +523,10 @@
 },
 
 {
-  "id": "quai-de-valmy",
-  "name": "Quai de Valmy",
-  "lat": 0.0000,
-  "lng": 0.0000,
-  "address": "159 bis quai de Valmy",
-  "arrondissement": "10e",
-  "equipment": [],
-  "note": ""
-},
-
-{
   "id": "parc-richard-lenoir",
   "name": "Parc Richard Lenoir",
-  "lat": 0.0000,
-  "lng": 0.0000,
+  "lat": 48.86127,
+  "lng": 2.37209,
   "address": "73-81 boulevard Richard Lenoir",
   "arrondissement": "11e",
   "equipment": [],
@@ -553,8 +547,8 @@
 {
   "id": "square-henri-christine",
   "name": "Square Henri Christiné",
-  "lat": 0.0000,
-  "lng": 0.0000,
+  "lat": 48.87759,
+  "lng": 2.36585,
   "address": "151 quai de Jemmapes",
   "arrondissement": "10e",
   "equipment": [],
@@ -564,10 +558,10 @@
 {
   "id": "square-rue-des-jardiniers",
   "name": "Square rue des Jardiniers",
-  "lat": 0.0000,
-  "lng": 0.0000,
-  "address": "rue des Jardiniers",
-  "arrondissement": "12e",
+  "lat": 48.85211,
+  "lng": 2.39148,
+  "address": "2 passage Dumas",
+  "arrondissement": "11e",
   "equipment": [],
   "note": ""
 },
@@ -575,9 +569,9 @@
 {
   "id": "square-tolstoi",
   "name": "Square Tolstoï",
-  "lat": 0.0000,
-  "lng": 0.0000,
-  "address": "",
+  "lat":48.85311,
+  "lng": 2.26100,
+  "address": "1 avenue du Maréchal Lyautey",
   "arrondissement": "16e",
   "equipment": [],
   "note": ""
