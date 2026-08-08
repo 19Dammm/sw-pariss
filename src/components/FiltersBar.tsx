@@ -6,6 +6,8 @@ type FiltersBarProps = {
   onArrondissementChange: (value: string) => void
   options: string[]
   equipmentOptions: EquipmentOption[]
+  selectedEquipment: string[]
+  onToggleEquipment: (equipmentName: string) => void
 }
 
 
@@ -14,6 +16,8 @@ export function FiltersBar({
   onArrondissementChange,
   options,
   equipmentOptions,
+  selectedEquipment,
+onToggleEquipment,
 }: FiltersBarProps) {
   return (
     <div className="filters-bar">
@@ -28,7 +32,11 @@ export function FiltersBar({
           ))}
         </select>
       </label>
-      <EquipementFilters options={equipmentOptions} />
+      <EquipementFilters
+        options={equipmentOptions}
+        selectedEquipment={selectedEquipment}
+        onToggleEquipment={onToggleEquipment}
+      />
     </div>
   )
 }

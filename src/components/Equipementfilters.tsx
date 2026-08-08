@@ -3,9 +3,11 @@ import type { EquipmentOption } from '../lib/equipment'
 
 type EquipementFiltersProps = {
   options: EquipmentOption[]
+  selectedEquipment: string[]
+  onToggleEquipment: (equipmentName: string) => void
 }
 
-export default function EquipementFilters({ options }: EquipementFiltersProps) {
+export default function EquipementFilters({ options, selectedEquipment, onToggleEquipment }: EquipementFiltersProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (

@@ -33,6 +33,7 @@ function App() {
   const [showProposeModal, setShowProposeModal] = useState(false)
   const { position } = useGeolocation()
   const { theme, toggleTheme } = useTheme()
+  const [selectedEquipment, setSelectedEquipment] = useState<string[]>([])
 
   useEffect(() => {
     const load = async () => {
@@ -114,6 +115,16 @@ console.log(equipmentOptions)
           ? 'Aucun spot ne correspond à ta recherche.'
           : null
 
+  const toggleEquipment = (equipmentName: string) => {
+  setSelectedEquipment((current) => {
+    if (current.includes(equipmentName)) {
+      return current.filter((name) => name !== equipmentName)
+    }
+
+    return [...current, equipmentName]
+  })
+}
+
   return (
     <div className="app-shell">
       <Header onProposeSpot={() => setShowProposeModal(true)} />
@@ -140,6 +151,8 @@ console.log(equipmentOptions)
             onArrondissementChange={setArrondissement}
             options={arrondissementOptions}
             equipmentOptions={equipmentOptions}
+            selectedEquipment={selectedEquipment}
+            onToggleEquipment={toggleEquipment}
           />
         </div>
 
