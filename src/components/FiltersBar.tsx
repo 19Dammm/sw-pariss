@@ -1,5 +1,7 @@
-import EquipementFilters from './Equipementfilters' ;
+import EquipementFilters from './Equipementfilters'
+import { AccessFilters } from './AccessFilters'
 import type { EquipmentOption } from '../lib/equipment'
+import type { AccessFilterKey } from '../lib/access'
 
 type FiltersBarProps = {
   arrondissement: string
@@ -8,8 +10,11 @@ type FiltersBarProps = {
   equipmentOptions: EquipmentOption[]
   selectedEquipment: string[]
   onToggleEquipment: (equipmentName: string) => void
+  onApplyEquipment: () => void
+  equipmentMatchCount: number
+  accessFilters: AccessFilterKey[]
+  onToggleAccessFilter: (key: AccessFilterKey) => void
 }
-
 
 export function FiltersBar({
   arrondissement,
@@ -17,7 +22,11 @@ export function FiltersBar({
   options,
   equipmentOptions,
   selectedEquipment,
-onToggleEquipment,
+  onToggleEquipment,
+  onApplyEquipment,
+  equipmentMatchCount,
+  accessFilters,
+  onToggleAccessFilter,
 }: FiltersBarProps) {
   return (
     <div className="filters-bar">
@@ -32,12 +41,16 @@ onToggleEquipment,
           ))}
         </select>
       </label>
+
       <EquipementFilters
         options={equipmentOptions}
         selectedEquipment={selectedEquipment}
         onToggleEquipment={onToggleEquipment}
+        onApplyEquipment={onApplyEquipment}
+        matchCount={equipmentMatchCount}
       />
+
+      <AccessFilters activeFilters={accessFilters} onToggleAccessFilter={onToggleAccessFilter} />
     </div>
   )
 }
-

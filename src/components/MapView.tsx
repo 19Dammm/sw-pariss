@@ -32,10 +32,10 @@ function MapBounds({ spots }: { spots: Spot[] }) {
     previousKey.current = key
 
     const bounds = L.latLngBounds(
-    spots
-    .filter(s => s.lat !== undefined && s.lng !== undefined)
-    .map(s => [s.lat!, s.lng!] as [number, number])
-)
+      spots
+        .filter((s) => s.lat !== undefined && s.lng !== undefined)
+        .map((s) => [s.lat!, s.lng!] as [number, number]),
+    )
     map.fitBounds(bounds, { padding: [48, 48], maxZoom: 15, animate: false })
   }, [map, spots])
 
@@ -62,6 +62,28 @@ function UserRecenter({
   return null
 }
 
+function SpotFlyTo({ spotId, spots }: { spotId: string | null; spots: Spot[] }) {
+  const map = useMap()
+  const previousSpotId = useRef<string | null>(null)
+
+  useEffect(() => {
+    if (!spotId) {
+      previousSpotId.current = null
+      return
+    }
+
+    if (spotId === previousSpotId.current) return
+
+    const spot = spots.find((entry) => entry.id === spotId)
+    if (!spot || spot.lat === undefined || spot.lng === undefined) return
+
+    previousSpotId.current = spotId
+    map.flyTo([spot.lat, spot.lng], 16, { animate: true, duration: 0.8 })
+  }, [map, spotId, spots])
+
+  return null
+}
+
 export function MapView({
   spots,
   userPosition,
@@ -79,6 +101,7 @@ export function MapView({
 
       <MapBounds spots={spots} />
       <UserRecenter userPosition={userPosition} recenterSignal={recenterSignal} />
+      <SpotFlyTo spotId={selectedSpotId} spots={spots} />
 
       {userPosition ? (
         <Circle
@@ -89,16 +112,15 @@ export function MapView({
       ) : null}
 
       {spots
-      .filter(spot => spot.lat !== undefined && spot.lng !== undefined)
-      .map((spot) => (
-        <Marker
-          key={spot.id}
-          position={[spot.lat!, spot.lng!]}
-          icon={createSpotIcon(theme, spot.id === selectedSpotId)}
-          eventHandlers={{ click: () => onSelectSpot(spot) }}
-        />
-      ))
-    }
+        .filter((spot) => spot.lat !== undefined && spot.lng !== undefined)
+        .map((spot) => (
+          <Marker
+            key={spot.id}
+            position={[spot.lat!, spot.lng!]}
+            icon={createSpotIcon(theme, spot.id === selectedSpotId)}
+            eventHandlers={{ click: () => onSelectSpot(spot) }}
+          />
+        ))}
     </MapContainer>
   )
 }

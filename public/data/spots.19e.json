@@ -11,7 +11,8 @@
       "Barres parallèles",
       "Modules fitness"
     ],
-    "note": "Cadre ombragé au bord du canal Saint-Martin. Idéal en été."
+    "note": "Cadre ombragé au bord du canal Saint-Martin. Idéal en été.",
+    "rating": { "average": 4.2, "count": 8 }
   },
   {
     "id": "spot-roquette",
@@ -68,7 +69,9 @@
       "Espalier",
       "Pont de singe"
     ],
-    "note": "Spot très fréquenté, réputé pour les pratiquants confirmés. Accès 24h/24. Métro Bercy."
+    "note": "Spot très fréquenté, réputé pour les pratiquants confirmés. Accès 24h/24. Métro Bercy.",
+    "access": { "open24h": true, "litAtNight": true },
+    "rating": { "average": 4.7, "count": 23 }
   },
   {
     "id": "spot-parc-floral",

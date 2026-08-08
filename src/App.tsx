@@ -14,6 +14,9 @@ import { getDistanceMeters } from './lib/distance'
 import { loadFavorites, saveFavorites } from './lib/favorites'
 import type { Spot } from './types/spot'
 import { getEquipmentOptions } from './lib/equipment'
+import type { AccessFilterKey } from './lib/access'
+import { countMatchingSpots, filterSpots } from './lib/filterSpots'
+import { loadUserRatings, saveUserRating, type UserRating } from './lib/ratings'
 
 const PARIS_19_CENTER = { lat: 48.8865, lng: 2.3849 }
 const NEARBY_RADIUS_METERS = 2000
@@ -34,6 +37,9 @@ function App() {
   const { position } = useGeolocation()
   const { theme, toggleTheme } = useTheme()
   const [selectedEquipment, setSelectedEquipment] = useState<string[]>([])
+  const [appliedEquipment, setAppliedEquipment] = useState<string[]>([])
+  const [accessFilters, setAccessFilters] = useState<AccessFilterKey[]>([])
+  const [userRatings, setUserRatings] = useState<Record<string, UserRating>>(() => loadUserRatings())
 
   useEffect(() => {
     const load = async () => {
@@ -61,37 +67,36 @@ function App() {
       }),
     [spots],
   )
-  const equipmentOptions = useMemo(
-  () => getEquipmentOptions(spots),
-  [spots],
-)
 
-console.log(equipmentOptions)
+  const equipmentOptions = useMemo(() => getEquipmentOptions(spots), [spots])
 
-  const filteredSpots = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase()
-    return spots.filter((spot) => {
-      const arrondissementMatch = !arrondissement || spot.arrondissement === arrondissement
-      const queryMatch =
-        !normalizedQuery ||
-        spot.name.toLowerCase().includes(normalizedQuery) ||
-        spot.address.toLowerCase().includes(normalizedQuery) ||
-        (spot.note?.toLowerCase().includes(normalizedQuery) ?? false)
-      return arrondissementMatch && queryMatch
-    })
-  }, [arrondissement, query, spots])
+  const equipmentMatchCount = useMemo(
+    () => countMatchingSpots(spots, selectedEquipment, accessFilters),
+    [accessFilters, selectedEquipment, spots],
+  )
+
+  const filteredSpots = useMemo(
+    () =>
+      filterSpots(spots, {
+        query,
+        arrondissement,
+        appliedEquipment,
+        accessFilters,
+      }),
+    [accessFilters, appliedEquipment, arrondissement, query, spots],
+  )
 
   const nearbySpots = useMemo(() => {
-  return filteredSpots
-    .filter(spot => spot.lat !== undefined && spot.lng !== undefined)
-    .map((spot) => ({
-      spot,
-      distance: getDistanceMeters(listCenter, { lat: spot.lat!, lng: spot.lng! }),
-    }))
-    .filter((entry) => entry.distance <= NEARBY_RADIUS_METERS)
-    .sort((a, b) => a.distance - b.distance)
-    .map((entry) => entry.spot)
-}, [listCenter, filteredSpots])
+    return filteredSpots
+      .filter((spot) => spot.lat !== undefined && spot.lng !== undefined)
+      .map((spot) => ({
+        spot,
+        distance: getDistanceMeters(listCenter, { lat: spot.lat!, lng: spot.lng! }),
+      }))
+      .filter((entry) => entry.distance <= NEARBY_RADIUS_METERS)
+      .sort((a, b) => a.distance - b.distance)
+      .map((entry) => entry.spot)
+  }, [listCenter, filteredSpots])
 
   const toggleFavorite = (spotId: string) => {
     setFavorites((current) => {
@@ -106,6 +111,40 @@ console.log(equipmentOptions)
     })
   }
 
+  const toggleEquipment = (equipmentName: string) => {
+    setSelectedEquipment((current) => {
+      if (current.includes(equipmentName)) {
+        return current.filter((name) => name !== equipmentName)
+      }
+
+      return [...current, equipmentName]
+    })
+  }
+
+  const applyEquipmentFilters = () => {
+    setAppliedEquipment([...selectedEquipment])
+  }
+
+  const toggleAccessFilter = (key: AccessFilterKey) => {
+    setAccessFilters((current) => {
+      if (current.includes(key)) {
+        return current.filter((entry) => entry !== key)
+      }
+
+      return [...current, key]
+    })
+  }
+
+  const rateSpot = (spotId: string, value: UserRating) => {
+    saveUserRating(spotId, value)
+    setUserRatings((current) => ({ ...current, [spotId]: value }))
+  }
+
+  const handleSelectSpot = (spot: Spot) => {
+    setSelectedSpot(spot)
+    setMode('map')
+  }
+
   const emptyMessage =
     loadStatus === 'error'
       ? 'Impossible de charger les spots. Réessaie plus tard.'
@@ -114,16 +153,6 @@ console.log(equipmentOptions)
         : loadStatus === 'ready' && filteredSpots.length === 0
           ? 'Aucun spot ne correspond à ta recherche.'
           : null
-
-  const toggleEquipment = (equipmentName: string) => {
-  setSelectedEquipment((current) => {
-    if (current.includes(equipmentName)) {
-      return current.filter((name) => name !== equipmentName)
-    }
-
-    return [...current, equipmentName]
-  })
-}
 
   return (
     <div className="app-shell">
@@ -134,7 +163,7 @@ console.log(equipmentOptions)
           spots={filteredSpots}
           userPosition={position}
           selectedSpotId={selectedSpot?.id ?? null}
-          onSelectSpot={setSelectedSpot}
+          onSelectSpot={handleSelectSpot}
           recenterSignal={recenterSignal}
           theme={theme}
         />
@@ -153,36 +182,46 @@ console.log(equipmentOptions)
             equipmentOptions={equipmentOptions}
             selectedEquipment={selectedEquipment}
             onToggleEquipment={toggleEquipment}
+            onApplyEquipment={applyEquipmentFilters}
+            equipmentMatchCount={equipmentMatchCount}
+            accessFilters={accessFilters}
+            onToggleAccessFilter={toggleAccessFilter}
           />
         </div>
 
         {loadStatus === 'loading' ? (
-          <div className="empty-state" role="status">Chargement des spots…</div>
+          <div className="empty-state" role="status">
+            Chargement des spots…
+          </div>
         ) : null}
 
         {emptyMessage ? (
-          <div className="empty-state" role="status">{emptyMessage}</div>
+          <div className="empty-state" role="status">
+            {emptyMessage}
+          </div>
         ) : null}
 
         {mode === 'list' ? (
-          <NearbyListView spots={nearbySpots} favoriteIds={favorites} onSelectSpot={setSelectedSpot} />
+          <NearbyListView spots={nearbySpots} favoriteIds={favorites} onSelectSpot={handleSelectSpot} />
         ) : null}
 
         {mode === 'favorites' ? (
-          <FavoritesView spots={spots} favoriteIds={favorites} onSelectSpot={setSelectedSpot} />
+          <FavoritesView spots={spots} favoriteIds={favorites} onSelectSpot={handleSelectSpot} />
         ) : null}
 
         <SpotSheet
           spot={selectedSpot}
+          allSpots={spots}
           isFavorite={selectedSpot ? favorites.has(selectedSpot.id) : false}
           userPosition={position}
+          userRatings={userRatings}
           onClose={() => setSelectedSpot(null)}
           onToggleFavorite={toggleFavorite}
+          onRateSpot={rateSpot}
+          onSelectSpot={handleSelectSpot}
         />
 
-        {showProposeModal ? (
-          <ProposeSpotModal onClose={() => setShowProposeModal(false)} />
-        ) : null}
+        {showProposeModal ? <ProposeSpotModal onClose={() => setShowProposeModal(false)} /> : null}
       </main>
 
       <BottomNav
