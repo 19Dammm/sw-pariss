@@ -13,6 +13,7 @@ import { useTheme } from './hooks/useTheme'
 import { getDistanceMeters } from './lib/distance'
 import { loadFavorites, saveFavorites } from './lib/favorites'
 import type { Spot } from './types/spot'
+import { getEquipmentOptions } from './lib/equipment'
 
 const PARIS_19_CENTER = { lat: 48.8865, lng: 2.3849 }
 const NEARBY_RADIUS_METERS = 2000
@@ -59,6 +60,12 @@ function App() {
       }),
     [spots],
   )
+  const equipmentOptions = useMemo(
+  () => getEquipmentOptions(spots),
+  [spots],
+)
+
+console.log(equipmentOptions)
 
   const filteredSpots = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
@@ -132,6 +139,7 @@ function App() {
             arrondissement={arrondissement}
             onArrondissementChange={setArrondissement}
             options={arrondissementOptions}
+            equipmentOptions={equipmentOptions}
           />
         </div>
 

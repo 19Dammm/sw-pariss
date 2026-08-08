@@ -952,3 +952,50 @@ html, body, #root {
   background: #27200a;
   border-color: #78350f;
 }
+.Equiment-Search-button {
+  background-color: rgb(80, 80, 196);
+  border: none;
+  border-radius: 999px;
+  padding: 8px 16px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.filters-bar {
+  align-items: flex-start;
+}
+
+.equipment-filter {
+  position: relative;
+}
+
+.equipment-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+}
+
+.div-equipement {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+
+  min-width: 240px;
+  max-height: 55vh;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 14px;
+  background: #e5e5e5;;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  color: var(--text);
+  z-index: 1100;
+}

@@ -1,13 +1,19 @@
+import EquipementFilters from './Equipementfilters' ;
+import type { EquipmentOption } from '../lib/equipment'
+
 type FiltersBarProps = {
   arrondissement: string
   onArrondissementChange: (value: string) => void
   options: string[]
+  equipmentOptions: EquipmentOption[]
 }
+
 
 export function FiltersBar({
   arrondissement,
   onArrondissementChange,
   options,
+  equipmentOptions,
 }: FiltersBarProps) {
   return (
     <div className="filters-bar">
@@ -22,6 +28,7 @@ export function FiltersBar({
           ))}
         </select>
       </label>
+      <EquipementFilters options={equipmentOptions} />
     </div>
   )
 }
