@@ -31,6 +31,7 @@ function App() {
   const [arrondissement, setArrondissement] = useState('')
   const [mode, setMode] = useState<Mode>('map')
   const [selectedSpot, setSelectedSpot] = useState<Spot | null>(null)
+  const [isSpotSheetOpen, setIsSpotSheetOpen] = useState(false)
   const [favorites, setFavorites] = useState<Set<string>>(() => loadFavorites())
   const [recenterSignal, setRecenterSignal] = useState(0)
   const [showProposeModal, setShowProposeModal] = useState(false)
@@ -142,6 +143,13 @@ function App() {
 
   const handleSelectSpot = (spot: Spot) => {
     setSelectedSpot(spot)
+    setIsSpotSheetOpen(true)
+    setMode('map')
+  }
+
+  const handleSelectMapSpot = (spot: Spot) => {
+    setSelectedSpot(spot)
+    setIsSpotSheetOpen(false)
     setMode('map')
   }
 
@@ -163,7 +171,9 @@ function App() {
           spots={filteredSpots}
           userPosition={position}
           selectedSpotId={selectedSpot?.id ?? null}
-          onSelectSpot={handleSelectSpot}
+          isSpotSheetOpen={isSpotSheetOpen}
+          onSelectSpot={handleSelectMapSpot}
+          onOpenSpotSheet={() => setIsSpotSheetOpen(true)}
           recenterSignal={recenterSignal}
           theme={theme}
         />
@@ -209,17 +219,22 @@ function App() {
           <FavoritesView spots={spots} favoriteIds={favorites} onSelectSpot={handleSelectSpot} />
         ) : null}
 
-        <SpotSheet
-          spot={selectedSpot}
-          allSpots={spots}
-          isFavorite={selectedSpot ? favorites.has(selectedSpot.id) : false}
-          userPosition={position}
-          userRatings={userRatings}
-          onClose={() => setSelectedSpot(null)}
-          onToggleFavorite={toggleFavorite}
-          onRateSpot={rateSpot}
-          onSelectSpot={handleSelectSpot}
-        />
+        {isSpotSheetOpen ? (
+          <SpotSheet
+            spot={selectedSpot}
+            allSpots={spots}
+            isFavorite={selectedSpot ? favorites.has(selectedSpot.id) : false}
+            userPosition={position}
+            userRatings={userRatings}
+            onClose={() => {
+              setIsSpotSheetOpen(false)
+              setSelectedSpot(null)
+            }}
+            onToggleFavorite={toggleFavorite}
+            onRateSpot={rateSpot}
+            onSelectSpot={handleSelectSpot}
+          />
+        ) : null}
 
         {showProposeModal ? <ProposeSpotModal onClose={() => setShowProposeModal(false)} /> : null}
       </main>

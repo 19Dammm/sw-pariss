@@ -17,7 +17,7 @@ type MapViewProps = {
   selectedSpotId: string | null
   isSpotSheetOpen: boolean
   onSelectSpot: (spot: Spot) => void
-  onOpenSpotSheet: (spot: boolean) => void
+  onOpenSpotSheet: (spot: Boolean) => void
   recenterSignal: number
   theme: Theme
 }
@@ -133,14 +133,14 @@ export function MapView({
                   direction="auto"
                   offset={[0, -44]}
                   className="spot-popup-tooltip"
+                  eventHandlers={{
+                    click: (event) => {
+                      L.DomEvent.stopPropagation(event.originalEvent)
+                      onOpenSpotSheet(true)
+                    },
+                  }}
                 >
-                  <div className="spot-popup-content"
-                  onClick={(e) => {
-                    console.log('click')
-                  e.stopPropagation()
-                  onOpenSpotSheet(true)
-                }}
-                  >
+                  <div className="spot-popup-content">
                     <strong className="spot-popup-name">{spot.name}</strong>
                     <span className="spot-popup-arr">{spot.arrondissement}</span>
                     <p className="spot-popup-cta">Appuie pour voir plus →</p>
