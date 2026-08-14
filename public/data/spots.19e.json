@@ -9,7 +9,9 @@
     "equipment": [
       "Barres de traction",
       "Barres parallèles",
-      "Modules fitness"
+      "Banc abdos",
+      "Espalier",
+      "Barres à dips"
     ],
     "note": "Cadre ombragé au bord du canal Saint-Martin. Idéal en été.",
     "rating": { "average": 4.2, "count": 8 }
@@ -237,14 +239,19 @@
   {
     "id": "spot-longchamp",
     "name": "Bois de Boulogne - Allée de Longchamp",
-    "lat": 48.85218,
-    "lng": 2.27541,
+    "lat": 48.87326,
+    "lng": 2.26811,
     "address": "Allée de Longchamp, Bois de Boulogne, 75016 Paris",
     "arrondissement": "16e",
     "equipment": [
       "Barres de traction",
       "Espalier",
       "Pont de singe",
+      "Barres à dips",
+      "Prise neutres",
+      "Box traction",
+      "Banc abdos",
+      "Barre à pompe",
       "Modules variés"
     ],
     "note": "Un des spots les plus complets de Paris, cadre boisé."
@@ -332,6 +339,23 @@
     "note": "Aire éclairée, accessible fauteuil roulant."
   },
   {
+    "id": "Jardin-D'Eole",
+    "name": "Jardin d'Eole",
+    "lat": 48.88602,
+    "lng": 2.36517,
+    "address": "Jardin d'Eole, 75018 Paris",
+    "arrondissement": "19e",
+    "equipment":[
+      "Barre de traction",
+      "Banc abdos",
+      "Barres à dips",
+      "Poids",
+      "Prise neutres",
+      "Pont de singe"
+    ],
+    "note": ""
+  },
+  {
     "id": "spot-chaumont",
     "name": "Centre sportif Porte Chaumont",
     "lat": 48.88539,
@@ -390,8 +414,8 @@
     "note": "Aire fitness complémentaire au nord du parc."
   },
   {
-    "id": "spot-buttes-chaumont",
-    "name": "Parc des Buttes-Chaumont",
+    "id": "spot-Robert-Debre",
+    "name": "Playground Robert Debre",
     "lat": 48.8806,
     "lng": 2.40055,
     "address": "Parc des Buttes-Chaumont, 75019 Paris",
@@ -399,35 +423,40 @@
     "equipment": [
       "Barres de traction",
       "Barres parallèles",
-      "Modules fitness"
+      "Modules fitness",
+      "Banc abdos",
+      "Modules fitness",
+      "Pont Serpent"
     ],
-    "note": "Agrès en plein air dans le parc. Métro Botzaris ou Buttes-Chaumont."
+    "note": "Agrès en plein air dans le parc. Métro Pre-saint-gervais (7bis) et Tram Hopital Robert Debre (t3b)."
   },
   {
     "id": "spot-quai-loire",
     "name": "Quai de Loire - Bassin de la Villette",
-    "lat": 48.8855,
-    "lng": 2.37,
-    "address": "Quai de la Loire, La Villette, 75019 Paris",
+    "lat": 48.88484,
+    "lng": 2.37336,
+    "address": "Promenade Jean Vigo, 75019 Paris",
     "arrondissement": "19e",
     "equipment": [
       "Banc abdos",
+      "Barres de traction",
+      "Barre à pompe",
+      "Espalier",
+      "Prise neutres",
       "Poids"
     ],
     "note": "Bord du canal. Métro Jaurès ou Laumière."
   },
   {
-    "id": "spot-quai-lot",
-    "name": "Quai du Lot",
-    "lat": 48.897,
-    "lng": 2.378,
-    "address": "Quai du Lot, Pont-de-Flandre, 75019 Paris",
-    "arrondissement": "19e",
+    "id": "",
+    "name": "",
+    "address": "",
+    "arrondissement": "",
     "equipment": [
-      "Anneaux",
-      "Poids"
+      "",
+      ""
     ],
-    "note": "Spot calme au bord de l'eau. Métro Corentin Cariou."
+    "note": ""
   },
   {
     "id": "spot-cambrai",
@@ -442,6 +471,9 @@
       "Box / plateforme squat",
       "Sac de frappe",
       "Pneu fonctionnel",
+      "Modules cross-training",
+      "Pont de singe",
+      "Banc abdos",
       "Fontaine",
       "Bancs"
     ],
@@ -469,7 +501,9 @@
     "arrondissement": "20e",
     "equipment": [
       "Barres de traction",
-      "Barres parallèles"
+      "Barres parallèles",
+      "Pont de singe",
+      "Barres à dips"
     ],
     "note": "Vue panoramique sur Paris. Métro Couronnes ou Belleville."
   },
@@ -509,8 +543,70 @@
   "lng": 2.37209,
   "address": "73-81 boulevard Richard Lenoir",
   "arrondissement": "11e",
-  "equipment": [],
+  "equipment": [
+    "Barre de traction",
+    "Espalier",
+    "Pont de singe",
+    "Poids",
+    "Modules cross-training",
+    "Modules fitness",
+    "Barre à pompe"
+  ],
   "note": ""
+},
+{
+  "id": "Playground-Porte-Des-Lilas-Droit",
+  "name": "Playground Porte des lilas",
+  "lat": 48.87823,
+  "lng": 2.40552,
+  "address": "30 Boulevard Serurier",
+  "arrondissement": "19e",
+  "equipment": [
+    "Barre de traction",
+    "Anneaux",
+    "Banc abdos",
+    "Machine Pec Fly",
+    "Machine Shoulder Press",
+    "Barre à pompe",
+    "Barres à dips",
+    "Poids",
+    "Tirage pour le dos"
+  ],
+  "note": "Ouvert et libre d'acces 24h/24, voir le Spot de Gauche pour etre complete, machine de crossfit sur le chemin"
+},
+{
+  "id": "Playground-Porte-Des-Lilas-Gauche",
+  "name": "Playground Porte des lilas",
+  "lat": 48.87841,
+  "lng": 2.40383,
+  "address": "30 Boulevard Serurier",
+  "arrondissement": "19e",
+  "equipment": [
+    "Barre de traction",
+    "Anneaux",
+    "Banc abdos",
+    "Barre à pompe",
+    "Barres à dips",
+    "Poids",
+    "Espalier"
+  ],
+  "note": "Ouvert et libre d'acces 24h/24, voir le Spot de Droite pour etre complete, machine de crossfit sur le chemin"
+},
+
+{
+  "id": "Parc-Serge-Gaisnbourg",
+  "name": "Parc Serge Gainsbourg",
+  "lat": 48.87850,
+  "lng": 2.40893,
+  "address": "11 Avenue Rene Fonck, 75019 Paris",
+  "arrondissement": "19e",
+  "equipment": [
+    "Banc abdos",
+    "Barre de traction",
+    "Barres à dips",
+    "Modules cross-training"
+  ],
+  "note": "Les horaires varient selon les horaires du parc / 24h/24 "
 },
 
 

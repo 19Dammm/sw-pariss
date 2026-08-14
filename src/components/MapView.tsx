@@ -1,10 +1,31 @@
-import { useEffect, useRef } from 'react'
-import { Circle, MapContainer, Marker, TileLayer, useMap } from 'react-leaflet'
+import { useEffect, useRef, useState } from 'react'
+import { Circle, MapContainer, Marker, Tooltip, TileLayer, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import { MAP_TILES } from '../lib/mapTiles'
 import { createSpotIcon } from '../lib/spotMarkerIcon'
 import type { Theme } from '../lib/theme'
 import type { Spot } from '../types/spot'
+
+const EQUIPMENT_ICONS: Record<string, string> = {
+  traction: '', suspension: '', échelle: '',
+  parallèles: '', dips: '',
+  abdos: '', banc: '',
+  pompe: '',
+  pont: '', module: '', parkour: '',
+  escalade: '', mur: '',
+  fitness: '', cross: '',
+  poids: '',
+  anneau: '',
+  singe: '',
+}
+
+function getEquipmentIcon(name: string): string {
+  const lower = name.toLowerCase()
+  for (const [kw, icon] of Object.entries(EQUIPMENT_ICONS)) {
+    if (lower.includes(kw)) return icon
+  }
+  return ''
+}
 
 type Position = {
   lat: number
@@ -19,6 +40,7 @@ type MapViewProps = {
   recenterSignal: number
   theme: Theme
 }
+type ViewMode = "map" | "tooltip" | "spotsheet";
 
 function MapBounds({ spots }: { spots: Spot[] }) {
   const map = useMap()
@@ -92,6 +114,7 @@ export function MapView({
   recenterSignal,
   theme,
 }: MapViewProps) {
+  const [viewMode, setViewMode] = useState<ViewMode>("map");
   const tiles = MAP_TILES[theme]
   const defaultCenter: [number, number] = [48.8865, 2.3849]
 
@@ -112,15 +135,71 @@ export function MapView({
       ) : null}
 
       {spots
-        .filter((spot) => spot.lat !== undefined && spot.lng !== undefined)
-        .map((spot) => (
-          <Marker
-            key={spot.id}
-            position={[spot.lat!, spot.lng!]}
-            icon={createSpotIcon(theme, spot.id === selectedSpotId)}
-            eventHandlers={{ click: () => onSelectSpot(spot) }}
-          />
-        ))}
+        .filter((spot, viewMode) => spot.lat !== undefined && spot.lng !== undefined)
+        .map((spot) => {
+          const isSelected = spot.id === selectedSpotId
+          const previewEquipment = spot.equipment.slice(0, 3)
+          const hasMore = spot.equipment.length > 3
+
+          return (
+           <Marker
+  key={`${spot.id}-${isSelected ? 'selected' : 'idle'}`}
+  position={[spot.lat!, spot.lng!]}
+  icon={createSpotIcon(theme, isSelected)}
+  eventHandlers={{
+    click: () => {
+      onSelectSpot(spot)
+      setViewMode("tooltip")
+    },
+  }}
+>
+  {isSelected && viewMode === "tooltip" && (
+    <Tooltip
+      permanent
+      direction="auto"
+      offset={[0, -44]}
+      className="spot-popup-tooltip"
+      eventHandlers={{
+        click: (e) => {
+          L.DomEvent.stopPropagation(e.originalEvent)
+          setViewMode("spotsheet")
+        },
+      }}
+    >
+      <div className="spot-popup-content">
+        <div className="spot-popup-header">
+          <strong className="spot-popup-name">
+            {spot.name}
+          </strong>
+
+          <span className="spot-popup-arr">
+            {spot.arrondissement}
+          </span>
+        </div>
+
+        <div className="spot-popup-equipment">
+          {previewEquipment.map((eq) => (
+            <span key={eq} className="spot-popup-chip">
+              {getEquipmentIcon(eq)} {eq}
+            </span>
+          ))}
+
+          {hasMore && (
+            <span className="spot-popup-chip spot-popup-chip--more">
+              +{spot.equipment.length - 3}
+            </span>
+          )}
+        </div>
+
+        <p className="spot-popup-cta">
+          Appuie pour voir plus →
+        </p>
+      </div>
+    </Tooltip>
+  )}
+</Marker>
+          )
+        })}
     </MapContainer>
   )
 }

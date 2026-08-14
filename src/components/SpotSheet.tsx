@@ -23,21 +23,20 @@ type SpotSheetProps = {
 }
 
 const EQUIPMENT_ICONS: Array<{ keywords: string[]; icon: string }> = [
-  { keywords: ['traction', 'suspension', 'échelle'], icon: '🏋️' },
-  { keywords: ['parallèles', 'dips'], icon: '💪' },
-  { keywords: ['anneau'], icon: '⭕' },
-  { keywords: ['abdos', 'banc'], icon: '🪑' },
+  { keywords: ['traction', 'suspension', 'échelle'], icon: '' },
+  { keywords: ['parallèles', 'dips'], icon: '' },
+  { keywords: ['anneau'], icon: '' },
+  { keywords: ['abdos', 'banc'], icon: '' },
   { keywords: ['pompe', 'barre à'], icon: '↕️' },
-  { keywords: ['parkour', 'pont', 'module', 'box', 'plateforme'], icon: '🏃' },
-  { keywords: ['escalade', 'mur'], icon: '🧗' },
-  { keywords: ['cross', 'parcours', 'fitness'], icon: '🔄' },
-  { keywords: ['boxe', 'frappe', 'sac'], icon: '🥊' },
-  { keywords: ['poids'], icon: '🏋️' },
-  { keywords: ['pneu'], icon: '🔵' },
-  { keywords: ['piste', 'athlétisme'], icon: '🏅' },
-  { keywords: ['fontaine'], icon: '💧' },
-  { keywords: ['pmr', 'accessible'], icon: '♿' },
-  { keywords: ['roof', 'espalier'], icon: '📐' },
+  { keywords: ['parkour', 'pont', 'module', 'box', 'plateforme'], icon: '' },
+  { keywords: ['escalade', 'mur'], icon: '' },
+  { keywords: ['cross', 'parcours', 'fitness'], icon: '' },
+  { keywords: ['boxe', 'frappe', 'sac'], icon: '' },
+  { keywords: ['poids'], icon: '' },
+  { keywords: ['pneu'], icon: '' },
+  { keywords: ['piste', 'athlétisme'], icon: '' },
+  { keywords: ['fontaine'], icon: '' },
+  { keywords: ['pmr', 'accessible'], icon: '' },
 ]
 
 function getEquipmentIcon(name: string): string {
