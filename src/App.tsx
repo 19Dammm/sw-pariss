@@ -147,12 +147,6 @@ function App() {
     setMode('map')
   }
 
-  const handleSelectMapSpot = (spot: Spot) => {
-    setSelectedSpot(spot)
-    setIsSpotSheetOpen(false)
-    setMode('map')
-  }
-
   const emptyMessage =
     loadStatus === 'error'
       ? 'Impossible de charger les spots. Réessaie plus tard.'
@@ -171,9 +165,7 @@ function App() {
           spots={filteredSpots}
           userPosition={position}
           selectedSpotId={selectedSpot?.id ?? null}
-          isSpotSheetOpen={isSpotSheetOpen}
-          onSelectSpot={handleSelectMapSpot}
-          onOpenSpotSheet={() => setIsSpotSheetOpen(true)}
+          onSelectSpot={handleSelectSpot}
           recenterSignal={recenterSignal}
           theme={theme}
         />

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Circle, MapContainer, Marker, TileLayer, Tooltip, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import { MAP_TILES } from '../lib/mapTiles'
@@ -15,9 +15,7 @@ type MapViewProps = {
   spots: Spot[]
   userPosition: Position | null
   selectedSpotId: string | null
-  isSpotSheetOpen: boolean
   onSelectSpot: (spot: Spot) => void
-  onOpenSpotSheet: (spot: boolean) => void
   recenterSignal: number
   theme: Theme
 }
@@ -90,14 +88,41 @@ export function MapView({
   spots,
   userPosition,
   selectedSpotId,
-  isSpotSheetOpen,
   onSelectSpot,
-  onOpenSpotSheet,
   recenterSignal,
   theme,
 }: MapViewProps) {
   const tiles = MAP_TILES[theme]
   const defaultCenter: [number, number] = [48.8865, 2.3849]
+  const [hoveredSpotId, setHoveredSpotId] = useState<string | null>(null)
+  const closeTooltipTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const keepTooltipOpen = () => {
+    if (closeTooltipTimer.current) {
+      clearTimeout(closeTooltipTimer.current)
+      closeTooltipTimer.current = null
+    }
+  }
+
+  const showTooltip = (spotId: string) => {
+    keepTooltipOpen()
+    setHoveredSpotId(spotId)
+  }
+
+  const scheduleTooltipClose = () => {
+    keepTooltipOpen()
+    closeTooltipTimer.current = setTimeout(() => {
+      setHoveredSpotId(null)
+      closeTooltipTimer.current = null
+    }, 150)
+  }
+
+  useEffect(
+    () => () => {
+      if (closeTooltipTimer.current) clearTimeout(closeTooltipTimer.current)
+    },
+    [],
+  )
 
   return (
     <MapContainer center={defaultCenter} zoom={14} className="map">
@@ -125,26 +150,33 @@ export function MapView({
               key={spot.id}
               position={[spot.lat!, spot.lng!]}
               icon={createSpotIcon(theme, isSelected)}
-              eventHandlers={{ click: () => onSelectSpot(spot) }}
+              eventHandlers={{
+                mouseover: () => showTooltip(spot.id),
+                mouseout: scheduleTooltipClose,
+                click: () => onSelectSpot(spot),
+              }}
             >
-              {isSelected && !isSpotSheetOpen ? (
+              {hoveredSpotId === spot.id ? (
                 <Tooltip
                   permanent
                   direction="auto"
                   offset={[0, -44]}
                   className="spot-popup-tooltip"
                 >
-                  <div className="spot-popup-content"
-                  onClick={(e) => {
-                    console.log('click')
-                  e.stopPropagation()
-                  onOpenSpotSheet(true)
-                }}
+                  <button
+                    type="button"
+                    className="spot-popup-content"
+                    onMouseEnter={keepTooltipOpen}
+                    onMouseLeave={scheduleTooltipClose}
+                    onClick={(event) => {
+                      event.stopPropagation()
+                      onSelectSpot(spot)
+                    }}
                   >
                     <strong className="spot-popup-name">{spot.name}</strong>
                     <span className="spot-popup-arr">{spot.arrondissement}</span>
-                    <p className="spot-popup-cta">Appuie pour voir plus →</p>
-                  </div>
+                    <p className="spot-popup-cta">Appuie pour voir plus</p>
+                  </button>
                 </Tooltip>
               ) : null}
             </Marker>
