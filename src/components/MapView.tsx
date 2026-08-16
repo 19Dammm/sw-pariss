@@ -158,6 +158,7 @@ export function MapView({
             >
               {hoveredSpotId === spot.id ? (
                 <Tooltip
+                  permanent
                   direction="auto"
                   offset={[0, -44]}
                   className="spot-popup-tooltip"
