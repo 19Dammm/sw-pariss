@@ -158,7 +158,6 @@ export function MapView({
             >
               {hoveredSpotId === spot.id ? (
                 <Tooltip
-                  permanent
                   direction="auto"
                   offset={[0, -44]}
                   className="spot-popup-tooltip"
@@ -185,3 +184,7 @@ export function MapView({
     </MapContainer>
   )
 }
+// Onclick bottom nav, if le click was on current mode, currentMode = 'map'
+//
+//
+//
