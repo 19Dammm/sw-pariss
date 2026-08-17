@@ -36,6 +36,7 @@ function App() {
   const [recenterSignal, setRecenterSignal] = useState(0)
   const [showProposeModal, setShowProposeModal] = useState(false)
   const { position } = useGeolocation()
+  const [groundFilters, setGroundFilters] = useState<string[]>([])
   const { theme, toggleTheme } = useTheme()
   const [selectedEquipment, setSelectedEquipment] = useState<string[]>([])
   const [appliedEquipment, setAppliedEquipment] = useState<string[]>([])
@@ -72,21 +73,13 @@ function App() {
   const equipmentOptions = useMemo(() => getEquipmentOptions(spots), [spots])
 
   const equipmentMatchCount = useMemo(
-    () => countMatchingSpots(spots, selectedEquipment, accessFilters),
-    [accessFilters, selectedEquipment, spots],
-  )
-
+  () => countMatchingSpots(spots, selectedEquipment, accessFilters, groundFilters),
+  [accessFilters, selectedEquipment, spots, groundFilters],
+)
   const filteredSpots = useMemo(
-    () =>
-      filterSpots(spots, {
-        query,
-        arrondissement,
-        appliedEquipment,
-        accessFilters,
-      }),
-    [accessFilters, appliedEquipment, arrondissement, query, spots],
-  )
-
+  () => filterSpots(spots, { query, arrondissement, appliedEquipment, accessFilters, groundFilters }),
+  [accessFilters, appliedEquipment, arrondissement, query, spots, groundFilters],
+)
   const nearbySpots = useMemo(() => {
     return filteredSpots
       .filter((spot) => spot.lat !== undefined && spot.lng !== undefined)
@@ -99,6 +92,11 @@ function App() {
       .map((entry) => entry.spot)
   }, [listCenter, filteredSpots])
 
+  const toggleGroundFilter = (value: string) => {
+  setGroundFilters((current) =>
+    current.includes(value) ? current.filter((v) => v !== value) : [...current, value]
+  )
+}
   const toggleFavorite = (spotId: string) => {
     setFavorites((current) => {
       const next = new Set(current)
@@ -145,7 +143,14 @@ function App() {
     setSelectedSpot(spot)
     setIsSpotSheetOpen(true)
     setMode('map')
-  }
+  } 
+  const handleResetFilters = () => {
+  setSelectedEquipment([])
+  setAppliedEquipment([])
+  setAccessFilters([])
+  setGroundFilters([])
+  setArrondissement('')
+}
 
   const emptyMessage =
     loadStatus === 'error'
@@ -188,6 +193,9 @@ function App() {
             equipmentMatchCount={equipmentMatchCount}
             accessFilters={accessFilters}
             onToggleAccessFilter={toggleAccessFilter}
+            groundFilters={groundFilters}
+            onToggleGroundFilter={toggleGroundFilter}
+            onResetFilters={handleResetFilters}
           />
         </div>
 
