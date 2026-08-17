@@ -25,7 +25,13 @@ export function BottomNav({ mode, theme, onSetMode, onRecenter, onToggleTheme }:
         type="button"
         data-tooltip="À proximité"
         className={`bottom-nav-item${mode === 'list' ? ' bottom-nav-item--active' : ''}`}
-        onClick={() => onSetMode('list')}
+        onClick={() => {
+      if (mode === 'list') {
+        onSetMode('map')
+      } else {
+        onSetMode('list')
+      }
+    }}
       >
         <List size={22} />
         <span className="bottom-nav-label">À proximité</span>
@@ -35,7 +41,13 @@ export function BottomNav({ mode, theme, onSetMode, onRecenter, onToggleTheme }:
         type="button"
         data-tooltip="Favoris"
         className={`bottom-nav-item${mode === 'favorites' ? ' bottom-nav-item--active' : ''}`}
-        onClick={() => onSetMode('favorites')}
+        onClick={() => {
+        if (mode === 'favorites') {
+          onSetMode('map')
+        } else {
+          onSetMode('favorites')
+        }
+      }}
       >
         <Heart size={22} />
         <span className="bottom-nav-label">Favoris</span>
