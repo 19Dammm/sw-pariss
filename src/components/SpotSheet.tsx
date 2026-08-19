@@ -27,7 +27,7 @@ const EQUIPMENT_ICONS: Array<{ keywords: string[]; icon: string }> = [
   { keywords: ['parallèles', 'dips'], icon: '' },
   { keywords: ['anneau'], icon: '' },
   { keywords: ['abdos', 'banc'], icon: '' },
-  { keywords: ['pompe', 'barre à'], icon: '↕' },
+  { keywords: ['pompe', 'barre à'], icon: '' },
   { keywords: ['parkour', 'pont', 'module', 'box', 'plateforme'], icon: '' },
   { keywords: ['escalade', 'mur'], icon: '' },
   { keywords: ['cross', 'parcours', 'fitness'], icon: '' },
@@ -44,7 +44,7 @@ function getEquipmentIcon(name: string): string {
   for (const { keywords, icon } of EQUIPMENT_ICONS) {
     if (keywords.some((kw) => lower.includes(kw))) return icon
   }
-  return '⚙️'
+  return ''
 }
 
 function formatDistance(meters: number): string {

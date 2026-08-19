@@ -13,6 +13,7 @@ import { useTheme } from './hooks/useTheme'
 import { getDistanceMeters } from './lib/distance'
 import { loadFavorites, saveFavorites } from './lib/favorites'
 import type { Spot } from './types/spot'
+import { FiltersPanel } from './components/FiltersPanel'
 import { getEquipmentOptions } from './lib/equipment'
 import type { AccessFilterKey } from './lib/access'
 import { countMatchingSpots, filterSpots } from './lib/filterSpots'
@@ -36,11 +37,12 @@ function App() {
   const [recenterSignal, setRecenterSignal] = useState(0)
   const [showProposeModal, setShowProposeModal] = useState(false)
   const { position } = useGeolocation()
-  const [groundFilters, setGroundFilters] = useState<string[]>([])
   const { theme, toggleTheme } = useTheme()
   const [selectedEquipment, setSelectedEquipment] = useState<string[]>([])
   const [appliedEquipment, setAppliedEquipment] = useState<string[]>([])
   const [accessFilters, setAccessFilters] = useState<AccessFilterKey[]>([])
+  const [groundFilters, setGroundFilters] = useState<string[]>([])
+  const [showOnlyFavorites, setShowOnlyFavorites] = useState(false)
   const [userRatings, setUserRatings] = useState<Record<string, UserRating>>(() => loadUserRatings())
 
   useEffect(() => {
@@ -73,13 +75,22 @@ function App() {
   const equipmentOptions = useMemo(() => getEquipmentOptions(spots), [spots])
 
   const equipmentMatchCount = useMemo(
-  () => countMatchingSpots(spots, selectedEquipment, accessFilters, groundFilters),
-  [accessFilters, selectedEquipment, spots, groundFilters],
+  () => countMatchingSpots(spots, selectedEquipment, accessFilters, groundFilters, showOnlyFavorites, favorites),
+  [accessFilters, selectedEquipment, spots, groundFilters, showOnlyFavorites, favorites],
 )
-  const filteredSpots = useMemo(
-  () => filterSpots(spots, { query, arrondissement, appliedEquipment, accessFilters, groundFilters }),
-  [accessFilters, appliedEquipment, arrondissement, query, spots, groundFilters],
-)
+
+  const filteredSpots = useMemo(() => {
+    const base = filterSpots(spots, {
+      query,
+      arrondissement,
+      appliedEquipment,
+      accessFilters,
+      groundFilters,
+    })
+    if (showOnlyFavorites) return base.filter((spot) => favorites.has(spot.id))
+    return base
+  }, [accessFilters, appliedEquipment, arrondissement, query, spots, groundFilters, showOnlyFavorites, favorites])
+
   const nearbySpots = useMemo(() => {
     return filteredSpots
       .filter((spot) => spot.lat !== undefined && spot.lng !== undefined)
@@ -92,11 +103,6 @@ function App() {
       .map((entry) => entry.spot)
   }, [listCenter, filteredSpots])
 
-  const toggleGroundFilter = (value: string) => {
-  setGroundFilters((current) =>
-    current.includes(value) ? current.filter((v) => v !== value) : [...current, value]
-  )
-}
   const toggleFavorite = (spotId: string) => {
     setFavorites((current) => {
       const next = new Set(current)
@@ -115,9 +121,14 @@ function App() {
       if (current.includes(equipmentName)) {
         return current.filter((name) => name !== equipmentName)
       }
-
       return [...current, equipmentName]
     })
+  }
+
+  const toggleGroundFilter = (value: string) => {
+    setGroundFilters((current) =>
+      current.includes(value) ? current.filter((v) => v !== value) : [...current, value],
+    )
   }
 
   const applyEquipmentFilters = () => {
@@ -129,7 +140,6 @@ function App() {
       if (current.includes(key)) {
         return current.filter((entry) => entry !== key)
       }
-
       return [...current, key]
     })
   }
@@ -139,18 +149,35 @@ function App() {
     setUserRatings((current) => ({ ...current, [spotId]: value }))
   }
 
+  const handleSetMode = (newMode: Mode) => {
+    setMode((current) => (current === newMode ? 'map' : newMode))
+  }
+
   const handleSelectSpot = (spot: Spot) => {
     setSelectedSpot(spot)
     setIsSpotSheetOpen(true)
     setMode('map')
-  } 
-  const handleResetFilters = () => {
-  setSelectedEquipment([])
-  setAppliedEquipment([])
-  setAccessFilters([])
-  setGroundFilters([])
-  setArrondissement('')
+  }
+
+  const handleSelectMapSpot = (spot: Spot) => {
+  if (selectedSpot?.id === spot.id) {
+    setSelectedSpot(null)
+    setIsSpotSheetOpen(false)
+  } else {
+    setSelectedSpot(spot)
+    setIsSpotSheetOpen(true)
+  }
+  setMode('map')
 }
+
+  const handleResetFilters = () => {
+    setSelectedEquipment([])
+    setAppliedEquipment([])
+    setAccessFilters([])
+    setGroundFilters([])
+    setArrondissement('')
+    setShowOnlyFavorites(false)
+  }
 
   const emptyMessage =
     loadStatus === 'error'
@@ -170,7 +197,7 @@ function App() {
           spots={filteredSpots}
           userPosition={position}
           selectedSpotId={selectedSpot?.id ?? null}
-          onSelectSpot={handleSelectSpot}
+          onSelectSpot={handleSelectMapSpot}
           recenterSignal={recenterSignal}
           theme={theme}
         />
@@ -196,7 +223,26 @@ function App() {
             groundFilters={groundFilters}
             onToggleGroundFilter={toggleGroundFilter}
             onResetFilters={handleResetFilters}
+            showOnlyFavorites={showOnlyFavorites}
+            onToggleFavorites={() => setShowOnlyFavorites((v) => !v)}
           />
+          <FiltersPanel
+          arrondissement={arrondissement}
+            onArrondissementChange={setArrondissement}
+            options={arrondissementOptions}
+            equipmentOptions={equipmentOptions}
+            selectedEquipment={selectedEquipment}
+            onToggleEquipment={toggleEquipment}
+            onApplyEquipment={applyEquipmentFilters}
+            equipmentMatchCount={equipmentMatchCount}
+            accessFilters={accessFilters}
+            onToggleAccessFilter={toggleAccessFilter}
+            groundFilters={groundFilters}
+            onToggleGroundFilter={toggleGroundFilter}
+            onResetFilters={handleResetFilters}
+            showOnlyFavorites={showOnlyFavorites}
+            onToggleFavorites={() => setShowOnlyFavorites((v) => !v)}>
+            </FiltersPanel>
         </div>
 
         {loadStatus === 'loading' ? (
@@ -219,11 +265,11 @@ function App() {
           <FavoritesView spots={spots} favoriteIds={favorites} onSelectSpot={handleSelectSpot} />
         ) : null}
 
-        {isSpotSheetOpen ? (
+        {isSpotSheetOpen && selectedSpot ? (
           <SpotSheet
             spot={selectedSpot}
             allSpots={spots}
-            isFavorite={selectedSpot ? favorites.has(selectedSpot.id) : false}
+            isFavorite={favorites.has(selectedSpot.id)}
             userPosition={position}
             userRatings={userRatings}
             onClose={() => {
@@ -242,7 +288,7 @@ function App() {
       <BottomNav
         mode={mode}
         theme={theme}
-        onSetMode={setMode}
+        onSetMode={handleSetMode}
         onRecenter={() => setRecenterSignal((v) => v + 1)}
         onToggleTheme={toggleTheme}
       />

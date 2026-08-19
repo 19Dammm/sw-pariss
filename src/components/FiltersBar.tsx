@@ -1,14 +1,14 @@
-import { useState, useEffect, useRef } from 'react'
+ import { useState, useEffect, useRef } from 'react'
 import type { EquipmentOption } from '../lib/equipment'
 import type { AccessFilterKey } from '../lib/access'
 import { ACCESS_FILTER_LABELS } from '../lib/access'
 
 const GROUND_OPTIONS: Array<{ value: string; label: string }> = [
-  { value: 'béton', label: '🪨 Béton' },
-  { value: 'tartan', label: '🔴 Tartan' },
-  { value: 'gazon', label: '🌿 Gazon' },
-  { value: 'sable', label: '🏖️ Sable' },
-  { value: 'dalle', label: '⬜ Dalle' },
+  { value: 'béton', label: ' Béton' },
+  { value: 'tartan', label: ' Tartan' },
+  { value: 'gazon', label: ' Gazon' },
+  { value: 'sable', label: ' Sable' },
+  { value: 'dalle', label: ' Dalle' },
 ]
 
 type FiltersBarProps = {
@@ -25,6 +25,8 @@ type FiltersBarProps = {
   groundFilters: string[]
   onToggleGroundFilter: (value: string) => void
   onResetFilters: () => void
+  showOnlyFavorites: boolean
+  onToggleFavorites: () => void
 }
 
 export function FiltersBar({
@@ -41,6 +43,8 @@ export function FiltersBar({
   groundFilters,
   onToggleGroundFilter,
   onResetFilters,
+  showOnlyFavorites,
+  onToggleFavorites,
 }: FiltersBarProps) {
   const [isOpen, setIsOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -49,7 +53,7 @@ export function FiltersBar({
     selectedEquipment.length + accessFilters.length + groundFilters.length
 
   const hasActiveFilters =
-    totalActiveFilters > 0 || arrondissement !== ''
+    totalActiveFilters > 0 || arrondissement !== '' || showOnlyFavorites
 
   const handleApply = () => {
     onApplyEquipment()
@@ -61,7 +65,6 @@ export function FiltersBar({
     setIsOpen(false)
   }
 
-  // Ferme le menu si on clique en dehors
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
@@ -101,9 +104,25 @@ export function FiltersBar({
         </button>
 
         {isOpen && (
-          <div className="div-equipement">
-            {/* Sol */}
-            <h4>Sol</h4>
+        <div className="div-equipement">
+
+          {/* Favoris — nouvelle section */}
+          <h4>Favoris</h4>
+          <div className="filter-chips-row">
+            <button
+              type="button"
+              className={`filter-chip${showOnlyFavorites ? ' filter-chip--active' : ''}`}
+              onClick={onToggleFavorites}
+              onChange={onToggleFavorites}
+            > Mes Favoris
+            </button>
+          </div>
+
+          <div className="filter-divider" />
+
+          {/* Sol */}
+          <h4>Sol</h4>
+          
             <div className="filter-chips-row">
               {GROUND_OPTIONS.map(({ value, label }) => (
                 <button
@@ -138,6 +157,7 @@ export function FiltersBar({
 
             {/* Équipements */}
             <h4>Équipements</h4>
+
             {equipmentOptions.map((option) => (
               <label key={option.name} className="equipment-option">
                 <input
@@ -145,6 +165,7 @@ export function FiltersBar({
                   checked={selectedEquipment.includes(option.name)}
                   onChange={() => onToggleEquipment(option.name)}
                 />
+                <span></span>
                 <span>
                   {option.name} ({option.count})
                 </span>

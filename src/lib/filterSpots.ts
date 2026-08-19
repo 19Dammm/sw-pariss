@@ -51,11 +51,16 @@ export function countMatchingSpots(
   appliedEquipment: string[],
   accessFilters: AccessFilterKey[],
   groundFilters: string[],
+  showOnlyFavorites: boolean,
+  favorites: Set<string>
 ): number {
-  return spots.filter(
-    (spot) =>
+  return spots.filter((spot) => {
+    const favMatch = !showOnlyFavorites || favorites.has(spot.id)
+    return (
+      favMatch &&
       spotMatchesEquipment(spot, appliedEquipment) &&
       spotMatchesAccess(spot, accessFilters) &&
-      spotMatchesGround(spot, groundFilters),
-  ).length
+      spotMatchesGround(spot, groundFilters)
+    )
+  }).length
 }
