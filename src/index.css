@@ -1297,17 +1297,101 @@ html, body, #root {
   flex: 1;
 }
 .filters-panel {
-  background-color: #9da5b4;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  font-size: var(--text-2xl);
-  font-weight: var(--font-weight-medium);
-  line-height: 1.5;
+  background-color: rgb(255, 255, 255);
+  width: 40vh;
+}
+
+.filters-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.filters-panel-header strong {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.filters-panel-reset {
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s;
+}
+
+.filters-panel-reset:hover {
+  color: var(--text);
+}
+
+.filters-panel-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.filters-panel-section:last-of-type {
+  border-bottom: none;
+}
+
+.filters-panel-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  white-space: nowrap;
+  width: 80px;
+  flex-shrink: 0;
 }
 
 .filter-options-row {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   overflow-x: auto;
+  scrollbar-width: none;
+  flex: 1;
+  border: none;
+  border-radius: 5px;
+}
+
+.filter-options-row::-webkit-scrollbar {
+  display: none;
+}
+
+.filters-panel-footer {
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+}
+.button-panel {
+   background-color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 0 8px;
+  margin: 3px 5px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  max-width: 100%;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s;
 }
