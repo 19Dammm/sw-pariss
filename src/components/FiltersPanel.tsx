@@ -90,7 +90,7 @@ export function FiltersPanel({
 
           {/* Favoris */}
           <div className="filter-category">
-            <h3>Favoris</h3>
+            <h3 className='h3-panel'>Favoris</h3>
             <div className="filter-options-row">
               <button
                 type="button"
@@ -104,7 +104,7 @@ export function FiltersPanel({
 
           {/* Equipement */}
           <div className="filter-category">
-            <h3>Equipement</h3>
+            <h3 className='h3-panel'>Equipement</h3>
             <div className="filter-options-row">
               {equipmentOptions
                 .slice(0, showAllEquipment ? equipmentOptions.length : 4)
@@ -133,7 +133,7 @@ export function FiltersPanel({
 
           {/* Sol */}
           <div className="filter-category">
-            <h3>Sol</h3>
+            <h3 className='h3-panel'>Sol</h3>
             <div className="filter-options-row">
               {GROUND_OPTIONS.map((g) => (
                 <button
@@ -150,7 +150,7 @@ export function FiltersPanel({
 
           {/* Conditions */}
           <div className="filter-category">
-            <h3>Conditions</h3>
+            <h3 className='h3-panel'>Conditions</h3>
             <div className="filter-options-row">
               {(Object.keys(ACCESS_FILTER_LABELS) as AccessFilterKey[]).map((key) => (
                 <button

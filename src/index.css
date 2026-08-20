@@ -1247,12 +1247,13 @@ html, body, #root {
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--surface);
-  padding: 6px 12px;
+  padding: 10px 12px;
   font-size: 12px;
   font-weight: 500;
   color: var(--text);
   cursor: pointer;
   transition: all 0.15s;
+  white-space: nowrap;
 }
 
 .filter-chip--active {
@@ -1301,7 +1302,8 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   background-color: rgb(255, 255, 255);
-  width: 40vh;
+  width: 50vh;
+  padding: 20px 22px;
 }
 
 .filters-panel-header {
@@ -1310,6 +1312,10 @@ html, body, #root {
   justify-content: space-between;
   padding: 12px 14px;
   border-bottom: 1px solid var(--border);
+}
+
+.h3-panel {
+  padding: 12px 14px;
 }
 
 .filters-panel-header strong {
@@ -1364,6 +1370,7 @@ html, body, #root {
   flex: 1;
   border: none;
   border-radius: 5px;
+  margin: 2px 5px;
 }
 
 .filter-options-row::-webkit-scrollbar {
@@ -1373,25 +1380,4 @@ html, body, #root {
 .filters-panel-footer {
   padding: 10px 14px;
   border-top: 1px solid var(--border);
-}
-.button-panel {
-   background-color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  padding: 0 8px;
-  margin: 3px 5px;
-  height: 28px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  vertical-align: middle;
-  max-width: 100%;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text);
-  cursor: pointer;
-  transition: all 0.15s;
 }
