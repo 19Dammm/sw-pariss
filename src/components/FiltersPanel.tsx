@@ -31,8 +31,6 @@ type FiltersPanelProps = {
 
 export function FiltersPanel({
   arrondissement,
-  onArrondissementChange,
-  options,
   equipmentOptions,
   selectedEquipment,
   onToggleEquipment,
