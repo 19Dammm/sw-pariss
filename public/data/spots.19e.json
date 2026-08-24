@@ -6,6 +6,7 @@
     "lng": 2.36634,
     "address": "151 Quai de Jemmapes, 75010 Paris",
     "arrondissement": "10e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Barres parallèles",
@@ -23,6 +24,7 @@
     "lng": 2.38484,
     "address": "Rue Merlin, 75011 Paris",
     "arrondissement": "11e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Modules fitness"
@@ -36,6 +38,7 @@
     "lng": 2.37157,
     "address": "Coulée verte René-Dumont, 75012 Paris",
     "arrondissement": "12e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Modules fitness"
@@ -49,6 +52,7 @@
     "lng": 2.40101,
     "address": "55 Boulevard de Picpus, 75012 Paris",
     "arrondissement": "12e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Barres parallèles"
@@ -62,6 +66,7 @@
     "lng": 2.38038,
     "address": "208 Quai de Bercy, 75012 Paris",
     "arrondissement": "12e",
+    "image": "",
     "equipment": [
       "Anneaux",
       "Barre à pompe",
@@ -82,6 +87,7 @@
     "lng": 2.40984,
     "address": "Route de la Pyramide, Bois de Vincennes, 75012 Paris",
     "arrondissement": "12e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Barres parallèles",
@@ -98,6 +104,7 @@
     "lng": 2.46424,
     "address": "Lac Daumesnil, Bois de Vincennes, 75012 Paris",
     "arrondissement": "12e",
+    "image": "",
     "equipment": [
       "Barres de suspension",
       "Barres parallèles",
@@ -113,6 +120,7 @@
     "lng": 2.41048,
     "address": "Porte de Charenton, 75012 Paris",
     "arrondissement": "12e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Barres parallèles"
@@ -126,6 +134,7 @@
     "lng": 2.35548,
     "address": "45 Boulevard Kellermann, 75013 Paris",
     "arrondissement": "13e",
+    "image": "",
     "equipment": [
       "Banc abdos",
       "Barre à pompe",
@@ -145,6 +154,7 @@
     "lng": 2.35978,
     "address": "Square de Tolbiac, 75013 Paris",
     "arrondissement": "13e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Modules fitness"
@@ -158,6 +168,7 @@
     "lng": 2.34802,
     "address": "Square Henri-Duchêne, 75013 Paris",
     "arrondissement": "13e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Barres parallèles"
@@ -171,6 +182,7 @@
     "lng": 2.36889,
     "address": "Porte d'Ivry, 75013 Paris",
     "arrondissement": "13e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Barres parallèles",
@@ -185,6 +197,7 @@
     "lng": 2.3378,
     "address": "Parc Montsouris, 75014 Paris",
     "arrondissement": "14e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Modules fitness"
@@ -198,6 +211,7 @@
     "lng": 2.2975,
     "address": "Avenue Albert Bartholomé, 75015 Paris",
     "arrondissement": "15e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Barres parallèles"
@@ -211,6 +225,7 @@
     "lng": 2.2681,
     "address": "Boulevard des Frères Voisin, 75015 Paris",
     "arrondissement": "15e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Modules fitness"
@@ -224,6 +239,7 @@
     "lng": 2.2801,
     "address": "Allée des Cygnes, 75015 Paris",
     "arrondissement": "15e",
+    "image": "/data/image/Spot-grenelle-1.jpg",
     "equipment": [
       "Barres de traction",
       "Barres parallèles",
@@ -243,6 +259,7 @@
     "lng": 2.26811,
     "address": "Allée de Longchamp, Bois de Boulogne, 75016 Paris",
     "arrondissement": "16e",
+    "image": "/data/image/Spot-Bois-De-Boulogne-1.png",
     "equipment": [
       "Barres de traction",
       "Espalier",
@@ -263,6 +280,7 @@
     "lng": 2.30783,
     "address": "102 Avenue de Saint-Ouen, 75017 Paris",
     "arrondissement": "17e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Barres parallèles",
@@ -277,6 +295,7 @@
     "lng": 2.34979,
     "address": "2 Rue Jean Cocteau, 75018 Paris",
     "arrondissement": "18e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Barres parallèles",
@@ -291,6 +310,7 @@
     "lng": 2.35799,
     "address": "Chapelle International, 75018 Paris",
     "arrondissement": "18e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Barres parallèles"
@@ -304,6 +324,7 @@
     "lng": 2.35315,
     "address": "Rue Cavé / Rue des Gardes, 75018 Paris",
     "arrondissement": "18e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Barres parallèles"
@@ -317,6 +338,7 @@
     "lng": 2.33974,
     "address": "21 Rue René Binet, 75018 Paris",
     "arrondissement": "18e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Barres parallèles",
@@ -331,6 +353,7 @@
     "lng": 2.38144,
     "address": "Canal Saint-Denis, 75019 Paris",
     "arrondissement": "19e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Modules fitness",
@@ -345,6 +368,7 @@
     "lng": 2.36517,
     "address": "Jardin d'Eole, 75018 Paris",
     "arrondissement": "19e",
+    "image": "",
     "equipment":[
       "Barre de traction",
       "Banc abdos",
@@ -362,6 +386,7 @@
     "lng": 2.39886,
     "address": "24 Avenue de la Porte Chaumont 75019 Paris",
     "arrondissement": "19e",
+    "image": "/data/image/Spot-Gymnase-Chaumont-1.jpg",
     "equipment": [
       "Barres de traction",
       "Barres parallèles",
@@ -377,6 +402,7 @@
     "lng": 2.3921,
     "address": "Allée du Cercle, Parc de la Villette, 75019 Paris",
     "arrondissement": "19e",
+    "image": "",
     "equipment": [
       "Barres parallèles",
       "Barres de traction",
@@ -394,6 +420,7 @@
     "lng": 2.3833,
     "address": "12/A Rue Ella Fitzgerald, Pont-de-Flandre, 75019 Paris",
     "arrondissement": "19e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Poids",
@@ -408,6 +435,7 @@
     "lng": 2.39627,
     "address": "Parc de la Villette, 75019 Paris",
     "arrondissement": "19e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Barres parallèles"
@@ -421,6 +449,7 @@
     "lng": 2.40055,
     "address": "Parc des Buttes-Chaumont, 75019 Paris",
     "arrondissement": "19e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Barres parallèles",
@@ -439,6 +468,7 @@
     "lng": 2.37336,
     "address": "Promenade Jean Vigo, 75019 Paris",
     "arrondissement": "19e",
+    "image": "",
     "equipment": [
       "Banc abdos",
       "Barres de traction",
@@ -454,6 +484,7 @@
     "name": "",
     "address": "",
     "arrondissement": "",
+    "image": "",
     "equipment": [
       "",
       ""
@@ -467,6 +498,7 @@
     "lng": 2.37123,
     "address": "172 rue d'Aubervilliers, 75019 Paris",
     "arrondissement": "19e",
+    "image": "",
     "equipment": [
       "Barres à dips",
       "Barres de traction",
@@ -488,6 +520,7 @@
     "lng": 2.41188,
     "address": "Rue Lucien Lambeau, 75020 Paris",
     "arrondissement": "20e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Barres parallèles"
@@ -501,6 +534,7 @@
     "lng": 2.3852,
     "address": "Cité de Gênes, Belleville, 75020 Paris",
     "arrondissement": "20e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Barres parallèles",
@@ -516,6 +550,7 @@
     "lng": 2.3904,
     "address": "Square Élisa Borey, 75020 Paris",
     "arrondissement": "20e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Barres parallèles"
@@ -529,6 +564,7 @@
     "lng": 2.33665,
     "address": "Avenue de l'Observatoire, 75006 Paris",
     "arrondissement": "6e",
+    "image": "",
     "equipment": [
       "Barres de traction",
       "Barres parallèles",
@@ -536,101 +572,101 @@
     ],
     "note": "Petit spot complet au nord du jardin, adjacent au Luxembourg. Barres, parallèles, pont de singe."
   },
-
-
-{
-  "id": "parc-richard-lenoir",
-  "name": "Parc Richard Lenoir",
-  "lat": 48.86127,
-  "lng": 2.37209,
-  "address": "73-81 boulevard Richard Lenoir",
-  "arrondissement": "11e",
-  "equipment": [
-    "Barre de traction",
-    "Espalier",
-    "Pont de singe",
-    "Poids",
-    "Modules cross-training",
-    "Modules fitness",
-    "Barre à pompe"
-  ],
-  "note": ""
-},
-{
-  "id": "Playground-Porte-Des-Lilas-Droit",
-  "name": "Playground Porte des lilas",
-  "lat": 48.87823,
-  "lng": 2.40552,
-  "address": "30 Boulevard Serurier",
-  "arrondissement": "19e",
-  "equipment": [
-    "Barre de traction",
-    "Anneaux",
-    "Banc abdos",
-    "Machine Pec Fly",
-    "Machine Shoulder Press",
-    "Barre à pompe",
-    "Barres à dips",
-    "Poids",
-    "Tirage pour le dos"
-  ],
-  "note": "Ouvert et libre d'acces 24h/24, voir le Spot de Gauche pour etre complete, machine de crossfit sur le chemin"
-},
-{
-  "id": "Playground-Porte-Des-Lilas-Gauche",
-  "name": "Playground Porte des lilas",
-  "lat": 48.87841,
-  "lng": 2.40383,
-  "address": "30 Boulevard Serurier",
-  "arrondissement": "19e",
-  "equipment": [
-    "Barre de traction",
-    "Anneaux",
-    "Banc abdos",
-    "Barre à pompe",
-    "Barres à dips",
-    "Poids",
-    "Espalier"
-  ],
-  "note": "Ouvert et libre d'acces 24h/24, voir le Spot de Droite pour etre complete, machine de crossfit sur le chemin"
-},
-
-{
-  "id": "Parc-Serge-Gaisnbourg",
-  "name": "Parc Serge Gainsbourg",
-  "lat": 48.87850,
-  "lng": 2.40893,
-  "address": "11 Avenue Rene Fonck, 75019 Paris",
-  "arrondissement": "19e",
-  "equipment": [
-    "Banc abdos",
-    "Barre de traction",
-    "Barres à dips",
-    "Modules cross-training"
-  ],
-  "note": "Les horaires varient selon les horaires du parc / 24h/24 "
-},
-
-
-{
-  "id": "square-rue-des-jardiniers",
-  "name": "Square rue des Jardiniers",
-  "lat": 48.85211,
-  "lng": 2.39148,
-  "address": "2 passage Dumas",
-  "arrondissement": "11e",
-  "equipment": [],
-  "note": ""
-},
-
-{
-  "id": "square-tolstoi",
-  "name": "Square Tolstoï",
-  "lat":48.85311,
-  "lng": 2.26100,
-  "address": "1 avenue du Maréchal Lyautey",
-  "arrondissement": "16e",
-  "equipment": [],
-  "note": ""
-}
+  {
+    "id": "parc-richard-lenoir",
+    "name": "Parc Richard Lenoir",
+    "lat": 48.86127,
+    "lng": 2.37209,
+    "address": "73-81 boulevard Richard Lenoir",
+    "arrondissement": "11e",
+    "image": "",
+    "equipment": [
+      "Barre de traction",
+      "Espalier",
+      "Pont de singe",
+      "Poids",
+      "Modules cross-training",
+      "Modules fitness",
+      "Barre à pompe"
+    ],
+    "note": ""
+  },
+  {
+    "id": "Playground-Porte-Des-Lilas-Droit",
+    "name": "Playground Porte des lilas",
+    "lat": 48.87823,
+    "lng": 2.40552,
+    "address": "30 Boulevard Serurier",
+    "arrondissement": "19e",
+    "image": "/data/image/Spot-Porte-Des-Lilas-Droit-1.jpg",
+    "equipment": [
+      "Barre de traction",
+      "Anneaux",
+      "Banc abdos",
+      "Machine Pec Fly",
+      "Machine Shoulder Press",
+      "Barre à pompe",
+      "Barres à dips",
+      "Poids",
+      "Tirage pour le dos"
+    ],
+    "note": "Ouvert et libre d'acces 24h/24, voir le Spot de Gauche pour etre complete, machine de crossfit sur le chemin"
+  },
+  {
+    "id": "Playground-Porte-Des-Lilas-Gauche",
+    "name": "Playground Porte des lilas",
+    "lat": 48.87841,
+    "lng": 2.40383,
+    "address": "30 Boulevard Serurier",
+    "arrondissement": "19e",
+    "image": "/data/image/Spot-Porte-Des-Lilas-Gauche-1.jpg",
+    "equipment": [
+      "Barre de traction",
+      "Anneaux",
+      "Banc abdos",
+      "Barre à pompe",
+      "Barres à dips",
+      "Poids",
+      "Espalier"
+    ],
+    "note": "Ouvert et libre d'acces 24h/24, voir le Spot de Droite pour etre complete, machine de crossfit sur le chemin"
+  },
+  {
+    "id": "Parc-Serge-Gaisnbourg",
+    "name": "Parc Serge Gainsbourg",
+    "lat": 48.87850,
+    "lng": 2.40893,
+    "address": "11 Avenue Rene Fonck, 75019 Paris",
+    "arrondissement": "19e",
+    "image": "/data/image/Spot-Serge-Gainsbourg.jpg",
+    "equipment": [
+      "Banc abdos",
+      "Barre de traction",
+      "Barres à dips",
+      "Modules cross-training"
+    ],
+    "note": "Les horaires varient selon les horaires du parc / 24h/24 "
+  },
+  {
+    "id": "square-rue-des-jardiniers",
+    "name": "Square rue des Jardiniers",
+    "lat": 48.85211,
+    "lng": 2.39148,
+    "address": "2 passage Dumas",
+    "arrondissement": "11e",
+    "image": "",
+    "equipment": [],
+    "note": ""
+  },
+  {
+    "id": "square-tolstoi",
+    "name": "Square Tolstoï",
+    "lat":48.85311,
+    "lng": 2.26100,
+    "address": "1 avenue du Maréchal Lyautey",
+    "arrondissement": "16e",
+    "image": "",
+    "equipment": [],
+    "note": ""
+  }
 ]

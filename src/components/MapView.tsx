@@ -162,6 +162,7 @@ export function MapView({
                   direction="auto"
                   offset={[0, -44]}
                   className="spot-popup-tooltip"
+                  
                 >
                   <button
                     type="button"

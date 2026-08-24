@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import SpotImage from './SpotImage'
 import { getDistanceMeters } from '../lib/distance'
 import { buildMapsUrl } from '../lib/openInMaps'
 import { formatRatingAverage, getEffectiveRating, type UserRating } from '../lib/ratings'
@@ -109,6 +110,7 @@ export function SpotSheet({
       </div>
 
       <p className="sheet-address">{spot.address}</p>
+      <SpotImage spot={spot} />
 
       {spot.isVerified === false && <div className="badge-unverified">📍 Emplacement à vérifier</div>}
 
@@ -220,6 +222,7 @@ function SimilarSpotsSection({
             <div>
               <strong>{spot.name}</strong>
               <p>{sharedEquipment.join(', ')}</p>
+              <SpotImage spot={spot} />
             </div>
             <span>{formatSimilarDistance(distance)}</span>
           </button>
