@@ -1,14 +1,27 @@
 import type { Spot } from '../types/spot'
 
-type SpotImageProps = {
-  spot: Spot
-}
 
-export default function SpotImage({ spot }: SpotImageProps) {
-  if (!spot.image) return null
+export default function SpotImages({ spot }: { spot: Spot }) {
+  if (!spot.image) {
+    return (
+      <div className="spot-sheet-images">
+        <div className="spot-sheet-images-scroll spot-sheet-images-empty">
+          <span>Aucune photo</span>
+        </div>
+      </div>
+    )
+  }
 
-  return <img 
-  src={spot.image}
-   alt={spot.name}
-   onError={() => console.error('Image introuvable :', spot.image)} />
+  return (
+    <div className="spot-sheet-images">
+      <div className="spot-sheet-images-scroll">
+        <img
+          src={spot.image}
+          alt={spot.name}
+          className="spot-sheet-image"
+          onError={() => console.error('Image introuvable :', spot.image)}
+        />
+      </div>
+    </div>
+  )
 }

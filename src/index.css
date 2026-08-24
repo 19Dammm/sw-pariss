@@ -350,7 +350,92 @@ html, body, #root {
 .leaflet-tooltip.spot-popup-tooltip {
   pointer-events: auto !important;
 }
+/* Spot sheet — layout Figma */
+.spot-sheet {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1002;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  background: var(--surface-solid);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+  height: 340px;
+}
 
+.spot-sheet-images {
+  width: 42%;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.spot-sheet-images-scroll {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.spot-sheet-images-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.spot-sheet-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.spot-sheet-images-footer {
+  flex-shrink: 0;
+  border-top: 1px solid var(--border);
+  background: var(--surface-muted);
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.spot-sheet-body {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.spot-sheet-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--surface-solid);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 18px 12px;
+}
+
+.spot-sheet-content {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
 .spot-popup-content {
   width: 100%;
   padding: 0;
@@ -380,24 +465,7 @@ html, body, #root {
   color: var(--accent);
 }
 
-.spot-sheet {
-  position: absolute;
-  z-index: 1002;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
-  background: var(--surface-solid);
-  border-radius: var(--radius);
-  padding: 18px 20px 20px;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--border);
-  color: var(--text);
-  max-height: 40vh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
+
 
 .sheet-header {
   display: flex;
