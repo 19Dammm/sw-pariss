@@ -46,6 +46,16 @@
     "note": "De la rue Édouard-Lartet à Bastille."
   },
   {
+  "id": "spot-canal-de-l'ourq",
+  "name": "Canal de l'Ourq",
+  "lat": 48.89587,
+  "lng": 2.40000,
+  "address": "Piste cyclable du Canal de l'Ourq"
+  "arrondissement":"",
+  "image":"",
+  
+  
+  {
     "id": "spot-mary-cassatt",
     "name": "Jardin Mary Cassatt",
     "lat": 48.84594,
