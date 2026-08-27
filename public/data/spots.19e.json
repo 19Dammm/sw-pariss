@@ -50,10 +50,22 @@
   "name": "Canal de l'Ourq",
   "lat": 48.89587,
   "lng": 2.40000,
-  "address": "Piste cyclable du Canal de l'Ourq"
+  "address": "Piste cyclable du Canal de l'Ourq",
   "arrondissement":"",
   "image":"",
-  
+  "equipment": [
+      "Anneaux",
+      "Barre à pompe",
+      "Barre de traction",
+      "Barres parallèles",
+      "Échelle horizontale",
+      "Espalier",
+      "Pont de singe",
+      "Barres à dips"
+    ],
+    "Note" : "Sur le canal de l'ourq, pres du rer E Pantin"
+
+  },
   
   {
     "id": "spot-mary-cassatt",
@@ -84,7 +96,8 @@
       "Barres parallèles",
       "Échelle horizontale",
       "Espalier",
-      "Pont de singe"
+      "Pont de singe",
+      "Barres à dips"
     ],
     "note": "Spot très fréquenté, réputé pour les pratiquants confirmés. Accès 24h/24. Métro Bercy.",
     "access": { "open24h": true, "litAtNight": true },
