@@ -5,7 +5,6 @@ import { MAP_TILES } from '../lib/mapTiles'
 import { createSpotIcon } from '../lib/spotMarkerIcon'
 import type { Theme } from '../lib/theme'
 import type { Spot } from '../types/spot'
-import SpotImage from './SpotImage'
 import { getEquipmentIcon } from './SpotSheet'
 
 type Position = {
