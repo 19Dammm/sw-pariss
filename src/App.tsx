@@ -259,7 +259,7 @@ function App() {
 
         {mode === 'list' ? (
         <NearbyListView
-          spots={filteredSpots}
+          spots={query || appliedEquipment.length > 0 || accessFilters.length > 0 || groundFilters.length > 0 ? filteredSpots : nearbySpots}
           favoriteIds={favorites}
           onSelectSpot={handleSelectSpot}
         />
