@@ -1,8 +1,8 @@
-import { Heart, List, Map, Moon, Navigation, Sun } from 'lucide-react'
+import { Heart, List, Map, Moon, Navigation, Satellite, Sun } from 'lucide-react'
 
 type BottomNavProps = {
   mode: 'map' | 'list' | 'favorites'
-  theme: 'light' | 'dark'
+  theme: 'light' | 'dark' | 'satellite'
   onSetMode: (mode: 'map' | 'list' | 'favorites') => void
   onRecenter: () => void
   onToggleTheme: () => void
@@ -69,7 +69,7 @@ export function BottomNav({ mode, theme, onSetMode, onRecenter, onToggleTheme }:
         className="bottom-nav-item"
         onClick={onToggleTheme}
       >
-        {theme === 'light' ? <Moon size={22} /> : <Sun size={22} />}
+        {theme === 'light' ? <Moon size={22} /> : theme === 'dark' ? <Sun size={22} /> : <Satellite size={22} />}
         <span className="bottom-nav-label">Thème</span>
       </button>
     </nav>

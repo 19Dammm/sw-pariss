@@ -1,4 +1,4 @@
-export type Theme = 'light' | 'dark'
+export type Theme = 'light' | 'dark'| 'satellite'
 
 const THEME_KEY = 'sw-paris:theme:v1'
 

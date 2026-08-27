@@ -10,8 +10,12 @@ export function useTheme() {
   }, [theme])
 
   const toggleTheme = () => {
-    setTheme((current) => (current === 'light' ? 'dark' : 'light'))
-  }
+    setTheme((current) => {
+      if (current === 'light') return 'dark'
+    if (current === 'dark') return 'satellite'
+    return 'light' 
+    } 
+  )}
 
   return { theme, setTheme, toggleTheme }
 }
