@@ -436,24 +436,56 @@ html, body, #root {
   flex-direction: column;
   gap: 14px;
 }
+
+.spot-popup-tooltip {
+  width: 28vh;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  margin: 5px 2px;
+}
 .spot-popup-content {
   width: 100%;
-  padding: 0;
+  padding: 5px 6px;
+  margin: 0;
   border: 0;
-  background: transparent;
+  border-radius: 0;
+  background: white;
   color: inherit;
   font: inherit;
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 5px;
   cursor: pointer;
+  overflow: hidden;
+  
+}
+.leaflet-tooltip {
+  padding: 10px !important;
+  margin: 10px !important;
+  border: none !important;
+  border-radius: 16px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+.spot-popup-image {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  display: block;
 }
 
 .spot-popup-arr,
 .spot-popup-cta {
   margin: 0;
   font-size: 12px;
+  padding: 2px 3px;
 }
 
 .spot-popup-arr {
@@ -465,6 +497,9 @@ html, body, #root {
   color: var(--accent);
 }
 
+.spot-popup-name {
+  margin: 5px 5px;
+}
 
 
 .sheet-header {
@@ -564,13 +599,15 @@ html, body, #root {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  max-height: 54px;
+  overflow: hidden;
 }
 
 .equipment-badge {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  background: var(--chip-bg);
+  background: white;
   border: 1px solid var(--border);
   color: var(--text);
   font-size: 12px;
@@ -578,6 +615,7 @@ html, body, #root {
   padding: 4px 10px;
   border-radius: 20px;
   line-height: 1.3;
+  white-space: nowrap;
 }
 
 .equipment-icon {

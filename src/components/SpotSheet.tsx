@@ -40,7 +40,7 @@ const EQUIPMENT_ICONS: Array<{ keywords: string[]; icon: string }> = [
   { keywords: ['pmr', 'accessible'], icon: '' },
 ]
 
-function getEquipmentIcon(name: string): string {
+export function getEquipmentIcon(name: string): string {
   const lower = name.toLowerCase()
   for (const { keywords, icon } of EQUIPMENT_ICONS) {
     if (keywords.some((kw) => lower.includes(kw))) return icon

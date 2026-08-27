@@ -5,6 +5,8 @@ import { MAP_TILES } from '../lib/mapTiles'
 import { createSpotIcon } from '../lib/spotMarkerIcon'
 import type { Theme } from '../lib/theme'
 import type { Spot } from '../types/spot'
+import SpotImage from './SpotImage'
+import { getEquipmentIcon } from './SpotSheet'
 
 type Position = {
   lat: number
@@ -19,6 +21,7 @@ type MapViewProps = {
   recenterSignal: number
   theme: Theme
 }
+
 
 function MapBounds({ spots }: { spots: Spot[] }) {
   const map = useMap()
@@ -162,8 +165,14 @@ export function MapView({
                   direction="auto"
                   offset={[0, -44]}
                   className="spot-popup-tooltip"
-                  
                 >
+                  {spot.image ? (
+                  <img
+                    src={spot.image}
+                    alt={spot.name}
+                    className="spot-popup-image"
+                  />
+                ) : null}
                   <button
                     type="button"
                     className="spot-popup-content"
@@ -176,6 +185,15 @@ export function MapView({
                   >
                     <strong className="spot-popup-name">{spot.name}</strong>
                     <span className="spot-popup-arr">{spot.arrondissement}</span>
+                    <div className="equipment-badges">
+              {spot.equipment.slice(0, 3).map((eq) => (
+                <span key={eq} className="equipment-badge">
+                  <span className="equipment-icon">{getEquipmentIcon(eq)}</span>
+                  {eq}
+                </span>
+              ))}
+              <button className='equipment-badge'> + </button>
+            </div>
                     <p className="spot-popup-cta">Appuie pour voir plus</p>
                   </button>
                 </Tooltip>

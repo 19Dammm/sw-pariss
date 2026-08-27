@@ -258,8 +258,12 @@ function App() {
         ) : null}
 
         {mode === 'list' ? (
-          <NearbyListView spots={nearbySpots} favoriteIds={favorites} onSelectSpot={handleSelectSpot} />
-        ) : null}
+        <NearbyListView
+          spots={filteredSpots}
+          favoriteIds={favorites}
+          onSelectSpot={handleSelectSpot}
+        />
+      ) : null}
 
         {mode === 'favorites' ? (
           <FavoritesView spots={spots} favoriteIds={favorites} onSelectSpot={handleSelectSpot} />
