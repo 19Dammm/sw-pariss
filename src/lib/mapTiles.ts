@@ -1,14 +1,14 @@
 export const MAP_TILES = {
   light: {
-    url: 'https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.png',
-    attribution: '© <a href="https://stadiamaps.com/">Stadia Maps</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  },
-  dark: {
-    url: 'https://tiles.stadiamaps.com/tiles/stamen_toner_dark/{z}/{x}/{y}{r}.png',
-    attribution: '© <a href="https://stadiamaps.com/">Stadia Maps</a>',
+    url: 'https://api.maptiler.com/maps/base-v4/{z}/{x}/{y}.png?key=zfzJCxAqH2bssodHgAaP',
+    attribution: '© <a href="https://www.maptiler.com/">MapTiler</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   },
   satellite: {
-    url: 'https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.png',
-    attribution: '© <a href="https://www.esri.com/">Esri</a>',
-  }
+    url: 'https://api.maptiler.com/maps/hybrid-v4/{z}/{x}/{y}.jpg?key=zfzJCxAqH2bssodHgAaP',
+    attribution: '© <a href="https://www.maptiler.com/">MapTiler</a>',
+  },
+  dark: {
+    url: 'https://api.maptiler.com/maps/base-v4-dark/{z}/{x}/{y}.png?key=zfzJCxAqH2bssodHgAaP',
+    attribution: '© <a href="https://www.maptiler.com/">MapTiler</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  },
 }
