@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { BottomNav } from './components/BottomNav'
 import { FavoritesView } from './components/FavoritesView'
-import { FiltersBar } from './components/FiltersBar'
 import { Header } from './components/Header'
 import { MapView } from './components/MapView'
 import { NearbyListView } from './components/NearbyListView'
@@ -189,7 +188,7 @@ function App() {
           : null
 
   return (
-    <div className="app-shell">
+  <div className={`app-shell ${theme === 'dark' ? 'theme-dark' : ''}`}>
       <Header onProposeSpot={() => setShowProposeModal(true)} />
 
       <main className="map-area">
@@ -208,23 +207,6 @@ function App() {
             onChange={setQuery}
             isListMode={mode === 'list'}
             onToggleMode={() => setMode((current) => (current === 'map' ? 'list' : 'map'))}
-          />
-          <FiltersBar
-            arrondissement={arrondissement}
-            onArrondissementChange={setArrondissement}
-            options={arrondissementOptions}
-            equipmentOptions={equipmentOptions}
-            selectedEquipment={selectedEquipment}
-            onToggleEquipment={toggleEquipment}
-            onApplyEquipment={applyEquipmentFilters}
-            equipmentMatchCount={equipmentMatchCount}
-            accessFilters={accessFilters}
-            onToggleAccessFilter={toggleAccessFilter}
-            groundFilters={groundFilters}
-            onToggleGroundFilter={toggleGroundFilter}
-            onResetFilters={handleResetFilters}
-            showOnlyFavorites={showOnlyFavorites}
-            onToggleFavorites={() => setShowOnlyFavorites((v) => !v)}
           />
           <FiltersPanel
           arrondissement={arrondissement}

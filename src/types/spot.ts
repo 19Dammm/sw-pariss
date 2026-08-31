@@ -24,7 +24,7 @@ export type Spot = {
     }
   }
   arrondissement: string
-  image?: string
+  image?: string | string[]
   equipment: string[]
   ground?: 'béton' | 'tartan' | 'gazon' | 'sable' | 'dalle'
   isVerified?: boolean

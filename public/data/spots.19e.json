@@ -1,12 +1,14 @@
 [
   {
-    "id": "spot-henri-christine",
-    "name": "Square Henri Christiné",
+    "id": "spot-quai-valmy",
+    "name": "Quai de Valmy",
     "lat": 48.87813,
     "lng": 2.36634,
     "address": "151 Quai de Jemmapes, 75010 Paris",
     "arrondissement": "10e",
-    "image": "",
+    "image": [
+    
+  ],
     "equipment": [
       "Barres de traction",
       "Barres parallèles",
@@ -56,7 +58,7 @@
   "equipment": [
       "Anneaux",
       "Barre à pompe",
-      "Barre de traction",
+      "Barres de traction",
       "Barres parallèles",
       "Échelle horizontale",
       "Espalier",
@@ -92,7 +94,7 @@
     "equipment": [
       "Anneaux",
       "Barre à pompe",
-      "Barre de traction",
+      "Barres de traction",
       "Barres parallèles",
       "Échelle horizontale",
       "Espalier",
@@ -161,7 +163,7 @@
     "equipment": [
       "Banc abdos",
       "Barre à pompe",
-      "Barre de traction",
+      "Barres de traction",
       "Barres parallèles",
       "Échelle horizontale",
       "Espalier",
@@ -177,7 +179,16 @@
     "lng": 2.35978,
     "address": "Square de Tolbiac, 75013 Paris",
     "arrondissement": "13e",
-    "image": "",
+    "image": [
+      "/data/image/Spot-Tolbiac-1.jpg",
+      "/data/image/Spot-Tolbiac-2.jpg",
+      "/data/image/Spot-Tolbiac-3.jpg",
+      "/data/image/Spot-Tolbiac-4.jpg",
+      "/data/image/Spot-Tolbiac-5.jpg",
+      "/data/image/Spot-Tolbiac-6.jpg",
+      "/data/image/Spot-Tolbiac-7.jpg",
+      "/data/image/Spot-Tolbiac-8.jpg"
+    ],
     "equipment": [
       "Barres de traction",
       "Modules fitness"
@@ -191,7 +202,12 @@
     "lng": 2.34802,
     "address": "Square Henri-Duchêne, 75013 Paris",
     "arrondissement": "13e",
-    "image": "",
+    "image": [
+    "/data/image/Spot-Henri-Duchaine-1.jpg",
+    "/data/image/Spot-Henri-Duchaine-2.jpg",
+    "/data/image/Spot-Henri-Duchaine-3.jpg",
+    "/data/image/Spot-Henri-Duchaine-4.jpg"
+  ],
     "equipment": [
       "Barres de traction",
       "Barres parallèles"
@@ -393,7 +409,7 @@
     "arrondissement": "19e",
     "image": "",
     "equipment":[
-      "Barre de traction",
+      "Barres de traction",
       "Banc abdos",
       "Barres à dips",
       "Poids",
@@ -430,7 +446,6 @@
       "Barres parallèles",
       "Barres de traction",
       "Modules cross-training",
-      "Sac de boxe",
       "Anneaux",
       "Modules parkour",
       "Machine Leg Press",
@@ -443,7 +458,7 @@
       "Box / plateforme squat",
       "Fontaine",
       "Parcours complet",
-      ""
+      "Sac de frappe"
     ],
     "note": "Plus grand espace street workout de France (~1 540 m²). Ouvert 6h-1h. Réservé aux +14 ans et +1,40 m."
   },
@@ -532,7 +547,12 @@
     "lng": 2.37123,
     "address": "172 rue d'Aubervilliers, 75019 Paris",
     "arrondissement": "19e",
-    "image": "",
+    "image": [
+      "/data/images/Spot-Cambrai-1.jpg",
+      "/data/images/Spot-Cambrai-2.jpg",
+      "/data/images/Spot-Cambrai-3.jpg",
+      "/data/images/Spot-Cambrai-4.jpg"
+    ],
     "equipment": [
       "Barres à dips",
       "Barres de traction",
@@ -615,7 +635,7 @@
     "arrondissement": "11e",
     "image": "",
     "equipment": [
-      "Barre de traction",
+      "Barres de traction",
       "Espalier",
       "Pont de singe",
       "Poids",
@@ -634,7 +654,7 @@
     "arrondissement": "19e",
     "image": "/data/image/Spot-Porte-Des-Lilas-Droit-1.jpg",
     "equipment": [
-      "Barre de traction",
+      "Barres de traction",
       "Anneaux",
       "Banc abdos",
       "Machine Pec Fly",
@@ -653,9 +673,12 @@
     "lng": 2.40383,
     "address": "30 Boulevard Serurier",
     "arrondissement": "19e",
-    "image": "/data/image/Spot-Porte-Des-Lilas-Gauche-1.jpg",
+    "image": [
+      "/data/image/Spot-Porte-Des-Lilas-Gauche-2.jpg",
+      "/data/image/Spot-Porte-Des-Lilas-Gauche-1.jpg"
+      ],
     "equipment": [
-      "Barre de traction",
+      "Barres de traction",
       "Anneaux",
       "Banc abdos",
       "Barre à pompe",
@@ -673,10 +696,15 @@
     "lng": 2.40893,
     "address": "11 Avenue Rene Fonck, 75019 Paris",
     "arrondissement": "19e",
-    "image": "/data/image/Spot-Serge-Gainsbourg.jpg",
+    "image":[
+       "/data/image/Spot-Serge-Gainsbourg.jpg",
+       "/data/image/Spot-Serge-Gainsbourg-2.jpg",
+       "/data/image/Spot-Serge-Gainsbourg-3.jpg",
+       "/data/image/Spot-Serge-Gainsbourg-4.jpg"
+    ],
     "equipment": [
       "Banc abdos",
-      "Barre de traction",
+      "Barres de traction",
       "Barres à dips",
       "Modules cross-training"
     ],

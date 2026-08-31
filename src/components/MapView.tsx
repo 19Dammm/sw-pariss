@@ -61,6 +61,14 @@ function UserRecenter({
     })
   }, [map, userPosition, recenterSignal])
 
+  const hasRecentered = useRef(false)
+
+    useEffect(() => {
+      if (!userPosition || hasRecentered.current) return
+      hasRecentered.current = true
+      map.setView([userPosition.lat, userPosition.lng], 15, { animate: true })
+    }, [map, userPosition])
+
   return null
 }
 
@@ -146,7 +154,7 @@ export function MapView({
         .filter((spot) => spot.lat !== undefined && spot.lng !== undefined)
         .map((spot) => {
           const isSelected = spot.id === selectedSpotId
-
+          const images = Array.isArray(spot.image) ? spot.image : spot.image ? [spot.image] : []
           return (
             <Marker
               key={spot.id}
@@ -165,9 +173,9 @@ export function MapView({
                   offset={[0, -44]}
                   className="spot-popup-tooltip"
                 >
-                  {spot.image ? (
+                  {images.length > 0 ? (
                   <img
-                    src={spot.image}
+                    src={images[0]}
                     alt={spot.name}
                     className="spot-popup-image"
                   />

@@ -11,7 +11,7 @@ const GROUND_OPTIONS: Array<{ value: string; label: string }> = [
   { value: 'dalle', label: 'Dalle' },
 ]
 
-type FiltersPanelProps = {
+export type FiltersPanelProps = {
   arrondissement: string
   onArrondissementChange: (value: string) => void
   options: string[]
@@ -31,8 +31,9 @@ type FiltersPanelProps = {
 
 export function FiltersPanel({
   arrondissement,
-  equipmentOptions,
+  options,
   selectedEquipment,
+  onArrondissementChange,
   onToggleEquipment,
   onApplyEquipment,
   equipmentMatchCount,
@@ -45,8 +46,8 @@ export function FiltersPanel({
   onToggleFavorites,
 }: FiltersPanelProps) {
   const [showPanel, setShowPanel] = useState(false)
-  const [showAllEquipment, setShowAllEquipment] = useState(false)
   const menuRef = useRef<HTMLDivElement | null>(null)
+  const [openCategory, setOpenCategory] = useState<string | null>(null)
 
   const totalActiveFilters =
     selectedEquipment.length + accessFilters.length + groundFilters.length
@@ -58,11 +59,21 @@ export function FiltersPanel({
     onApplyEquipment()
     setShowPanel(false)
   }
+  const toggleCategory = (category: string) => {
+  setOpenCategory((current) => current === category ? null : category)
+}
 
   const handleReset = () => {
     onResetFilters()
     setShowPanel(false)
   }
+  const EQUIPMENT_CATEGORIES = {
+  'Barres': ['Barres de traction', 'Barres parallèles', 'Barres à dips', 'Barre à pompe', 'Barres de suspension', 'Échelle horizontale', 'Prise neutres'],
+  'Suspension / Aérien': ['Anneaux', 'Pont de singe', 'Espalier'],
+  'Fitness / Machines': ['Modules fitness', 'Modules cross-training', 'Poids', 'Machine Leg Press', 'Machine Pec Fly', 'Machine Shoulder Press', 'Tirage pour le dos', 'Box / plateforme squat'],
+  'Combat / Fonctionnel': ['Sac de frappe', 'Pneu fonctionnel', 'Mur d\'escalade'],
+  'Utilitaires': ['Fontaine', 'Banc abdos', 'Accessible PMR'],
+}
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -76,9 +87,23 @@ export function FiltersPanel({
 
   return (
     <div className="filters-panel-wrapper" ref={menuRef}>
+       <label>
+        <span>Arrondissement</span>
+        <select
+          value={arrondissement}
+          onChange={(e) => onArrondissementChange(e.target.value)}
+        >
+          <option value="">Tous</option>
+          {options.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </label>
       <button
         type="button"
-        className={`filters-toggle-button${hasActiveFilters ? ' filters-toggle-button--active' : ''}`}
+        className={`equipment-filter-trigger${hasActiveFilters ? ' equipment-filter-trigger' : ''}`}
         onClick={() => setShowPanel((v) => !v)}
         aria-expanded={showPanel}
       >
@@ -105,30 +130,17 @@ export function FiltersPanel({
           {/* Equipement */}
           <div className="filter-category">
             <h3 className='h3-panel'>Equipement</h3>
-            <div className="filter-options-row">
-              {equipmentOptions
-                .slice(0, showAllEquipment ? equipmentOptions.length : 4)
-                .map((equipment) => (
-                  <button
-                    key={equipment.name}
-                    type="button"
-                    className={`filter-chip${selectedEquipment.includes(equipment.name) ? ' filter-chip--active' : ''}`}
-                    onClick={() => onToggleEquipment(equipment.name)}
-                  >
-                    {equipment.name}
-                  </button>
-                ))}
-
-              {equipmentOptions.length > 4 && (
-                <button
-                  type="button"
-                  className="filter-see-more"
-                  onClick={() => setShowAllEquipment((v) => !v)}
-                >
-                  {showAllEquipment ? 'Voir moins' : 'Voir plus'}
-                </button>
-              )}
-            </div>
+            {Object.entries(EQUIPMENT_CATEGORIES).map(([category, items]) => (
+          <CategoryAccordion
+            key={category}
+            category={category}
+            items={items}
+            selectedEquipment={selectedEquipment}
+            onToggleEquipment={onToggleEquipment}
+            isOpen={openCategory === category}
+            onToggle={() => toggleCategory(category)}
+          />
+        ))}
           </div>
 
           {/* Sol */}
@@ -184,6 +196,48 @@ export function FiltersPanel({
               Voir {equipmentMatchCount} spot{equipmentMatchCount !== 1 ? 's' : ''}
             </button>
           </div>
+        </div>
+      )}
+    </div>
+  )
+}
+function CategoryAccordion({
+  category,
+  items,
+  selectedEquipment,
+  onToggleEquipment,
+  isOpen,
+  onToggle,
+}: {
+  category: string
+  items: string[]
+  selectedEquipment: string[]
+  onToggleEquipment: (name: string) => void
+  isOpen: boolean
+  onToggle: () => void
+}) {
+  const activeCount = items.filter(item => selectedEquipment.includes(item)).length
+
+  return (
+    <div className="filter-category">
+      <button className="filter-category-header" onClick={onToggle}>
+        <span>{category}</span>
+        {activeCount > 0 && <span className="filter-category-badge">{activeCount}</span>}
+        <span>{isOpen ? '▲' : '▼'}</span>
+      </button>
+
+      {isOpen && (
+        <div className="filter-category-items">
+          {items.map((item) => (
+            <label key={item} className="equipment-option">
+              <input
+                type="checkbox"
+                checked={selectedEquipment.includes(item)}
+                onChange={() => onToggleEquipment(item)}
+              />
+              <span>{item}</span>
+            </label>
+          ))}
         </div>
       )}
     </div>
