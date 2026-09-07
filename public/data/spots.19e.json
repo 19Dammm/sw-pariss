@@ -184,10 +184,8 @@
       "/data/image/Spot-Tolbiac-2.jpg",
       "/data/image/Spot-Tolbiac-3.jpg",
       "/data/image/Spot-Tolbiac-4.jpg",
-      "/data/image/Spot-Tolbiac-5.jpg",
       "/data/image/Spot-Tolbiac-6.jpg",
-      "/data/image/Spot-Tolbiac-7.jpg",
-      "/data/image/Spot-Tolbiac-8.jpg"
+      "/data/image/Spot-Tolbiac-7.jpg"
     ],
     "equipment": [
       "Barres de traction",
@@ -203,10 +201,10 @@
     "address": "Square Henri-Duchêne, 75013 Paris",
     "arrondissement": "13e",
     "image": [
-    "/data/image/Spot-Henri-Duchaine-1.jpg",
-    "/data/image/Spot-Henri-Duchaine-2.jpg",
+    "/data/image/Spot-Henri-Duchene-1.jpg",
+    "/data/image/Spot-Henri-Duchene-2.jpg",
     "/data/image/Spot-Henri-Duchaine-3.jpg",
-    "/data/image/Spot-Henri-Duchaine-4.jpg"
+    "/data/image/Spot-Henri-Duchene-4.jpg"
   ],
     "equipment": [
       "Barres de traction",
@@ -548,10 +546,10 @@
     "address": "172 rue d'Aubervilliers, 75019 Paris",
     "arrondissement": "19e",
     "image": [
-      "/data/images/Spot-Cambrai-1.jpg",
-      "/data/images/Spot-Cambrai-2.jpg",
-      "/data/images/Spot-Cambrai-3.jpg",
-      "/data/images/Spot-Cambrai-4.jpg"
+      "/data/image/Spot-Cambrai-1.jpg",
+      "/data/image/Spot-Cambrai-2.jpg",
+      "/data/image/Spot-Cambrai-3.jpg",
+      "/data/image/Spot-Cambrai-4.jpg"
     ],
     "equipment": [
       "Barres à dips",

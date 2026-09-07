@@ -1,5 +1,6 @@
 import type { Spot } from '../types/spot'
 import { getEquipmentIcon } from './SpotSheet'
+import { getSpotImages } from '../lib/spotImages'
 
 type FavoritesViewProps = {
   spots: Spot[]
@@ -20,11 +21,7 @@ export function FavoritesView({ spots, favoriteIds, onSelectSpot }: FavoritesVie
       ) : (
         <ul className="nearby-list">
           {favoriteSpots.map((spot) => {
-            const images = Array.isArray(spot.image)
-              ? spot.image
-              : spot.image
-              ? [spot.image]
-              : []
+            const images = getSpotImages(spot)
 
             return (
               <li key={spot.id}>

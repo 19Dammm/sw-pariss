@@ -91,7 +91,6 @@ export function SpotSheet({
       : null
   const hasRealPosition = userPosition !== null
   const rating = getEffectiveRating(spot, userRatings)
-  const images = Array.isArray(spot.image) ? spot.image : spot.image ? [spot.image] : []
   return (
     <aside className="spot-sheet">
 

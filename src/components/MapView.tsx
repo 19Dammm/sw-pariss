@@ -6,6 +6,7 @@ import { createSpotIcon } from '../lib/spotMarkerIcon'
 import type { Theme } from '../lib/theme'
 import type { Spot } from '../types/spot'
 import { getEquipmentIcon } from './SpotSheet'
+import { getSpotImages } from '../lib/spotImages'
 
 type Position = {
   lat: number
@@ -154,7 +155,7 @@ export function MapView({
         .filter((spot) => spot.lat !== undefined && spot.lng !== undefined)
         .map((spot) => {
           const isSelected = spot.id === selectedSpotId
-          const images = Array.isArray(spot.image) ? spot.image : spot.image ? [spot.image] : []
+          const images = getSpotImages(spot)
           return (
             <Marker
               key={spot.id}
