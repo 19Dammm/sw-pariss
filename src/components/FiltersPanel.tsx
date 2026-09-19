@@ -86,29 +86,39 @@ export function FiltersPanel({
   }, [showPanel])
 
   return (
-    <div className="filters-panel-wrapper" ref={menuRef}>
-       <label>
-        <span>Arrondissement</span>
-        <select
-          value={arrondissement}
-          onChange={(e) => onArrondissementChange(e.target.value)}
-        >
-          <option value="">Tous</option>
-          {options.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-      </label>
-      <button
-        type="button"
-        className={`equipment-filter-trigger${hasActiveFilters ? ' equipment-filter-trigger' : ''}`}
-        onClick={() => setShowPanel((v) => !v)}
-        aria-expanded={showPanel}
+    <div className="equipment-filter" ref={menuRef}>
+  <div className="arrondissement-filter">
+    <span className="arrondissment-label">ARRDT.</span>
+
+    <div className="select-wrapper">
+      <select
+        className="arrondissement-select"
+        value={arrondissement}
+        onChange={(e) => onArrondissementChange(e.target.value)}
+        aria-label="Arrondissement"
       >
-        Filtres{totalActiveFilters > 0 ? ` (${totalActiveFilters})` : ''}
-      </button>
+        <option value="">Tous</option>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+
+      <span className="select-arrow" aria-hidden="true">⌄</span>
+    </div>
+  </div>
+      <button
+    type="button"
+    className={`equipment-filter-trigger${
+      hasActiveFilters ? ' equipment-filter-trigger--active' : ''
+    }`}
+    onClick={() => setShowPanel((v) => !v)}
+    aria-expanded={showPanel}
+  >
+    <span aria-hidden="true">▽</span>
+    Filtres{totalActiveFilters > 0 ? ` (${totalActiveFilters})` : ''}
+  </button>
 
       {showPanel && (
         <div className="filters-panel">
@@ -221,7 +231,7 @@ function CategoryAccordion({
   return (
     <div className="filter-category">
       <button className="filter-category-header" onClick={onToggle}>
-        <span>{category}</span>
+        <span className='span-category'>{category}</span>
         {activeCount > 0 && <span className="filter-category-badge">{activeCount}</span>}
         <span>{isOpen ? '▲' : '▼'}</span>
       </button>

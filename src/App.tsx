@@ -202,12 +202,15 @@ function App() {
         />
 
         <div className="overlay-top">
+          <div className='overlay-search'>
           <SearchBar
             value={query}
             onChange={setQuery}
             isListMode={mode === 'list'}
             onToggleMode={() => setMode((current) => (current === 'map' ? 'list' : 'map'))}
           />
+          </div>
+          <div className='overlay-filters'>
           <FiltersPanel
           arrondissement={arrondissement}
             onArrondissementChange={setArrondissement}
@@ -225,6 +228,7 @@ function App() {
             showOnlyFavorites={showOnlyFavorites}
             onToggleFavorites={() => setShowOnlyFavorites((v) => !v)}>
             </FiltersPanel>
+            </div>
         </div>
 
         {loadStatus === 'loading' ? (

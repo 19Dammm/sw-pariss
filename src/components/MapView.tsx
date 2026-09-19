@@ -7,6 +7,7 @@ import type { Theme } from '../lib/theme'
 import type { Spot } from '../types/spot'
 import { getEquipmentIcon } from './SpotSheet'
 import { getSpotImages } from '../lib/spotImages'
+import { useWindowWidth } from '../hooks/useWindowWidht'
 
 type Position = {
   lat: number
@@ -119,6 +120,7 @@ export function MapView({
     keepTooltipOpen()
     setHoveredSpotId(spotId)
   }
+  const isMobile = useWindowWidth() < 768
 
   const scheduleTooltipClose = () => {
     keepTooltipOpen()
@@ -136,7 +138,11 @@ export function MapView({
   )
 
   return (
-    <MapContainer center={defaultCenter} zoom={14} className="map">
+    <MapContainer 
+      center={defaultCenter}
+      zoom={14} 
+      zoomControl={false}
+      className="map">
       <TileLayer key={theme} attribution={tiles.attribution} url={tiles.url} />
 
       <MapBounds spots={spots} />
@@ -167,7 +173,7 @@ export function MapView({
                 click: () => onSelectSpot(spot),
               }}
             >
-              {hoveredSpotId === spot.id ? (
+              {!isMobile && hoveredSpotId === spot.id ? (
                 <Tooltip
                   permanent
                   direction="auto"
