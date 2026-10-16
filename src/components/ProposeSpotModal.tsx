@@ -24,7 +24,7 @@ const EQUIPMENT_OPTIONS = [
   'Accessible PMR',
 ]
 
-const CONTACT_EMAIL = 'ton@email.com' // ← remplace ici
+const CONTACT_EMAIL = 'ton@email.com' 
 
 export function ProposeSpotModal({ onClose }: ProposeSpotModalProps) {
   const [name, setName] = useState('')
